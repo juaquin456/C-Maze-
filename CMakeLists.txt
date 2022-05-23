@@ -3,7 +3,7 @@ project(proyecto_final_proyecto_grupo6)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(proyecto_final_proyecto_grupo6 main.cpp application.cpp application.h Keyboard.cpp Keyboard.h)
+add_executable(proyecto_final_proyecto_grupo6 main.cpp application.cpp application.h Keyboard.cpp Keyboard.h Mouse.cpp Mouse.h)
 
 SET(ALLEGRO_ROOT /usr/local/)
 

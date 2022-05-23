@@ -11,7 +11,7 @@
 #include <allegro5/allegro_primitives.h>
 
 #include "Keyboard.h"
-
+#include "Mouse.h"
 void must_init(bool test, const char *description)
 {
     if(test) return;
@@ -20,9 +20,13 @@ void must_init(bool test, const char *description)
     exit(1);
 }
 
+application::application() {
+}
+
 void application::run() {
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
+    must_init(al_install_mouse(), "mouse");
 
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     must_init(timer, "timer");
@@ -45,6 +49,7 @@ void application::run() {
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(disp));
     al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_mouse_event_source());
 
     bool done = false;
     bool redraw = true;
@@ -55,6 +60,7 @@ void application::run() {
     y = 100;
 
     Keyboard * k = Keyboard::get_instance();
+    Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
     while(1)
     {
@@ -75,6 +81,11 @@ void application::run() {
 
         switch(event.type)
         {
+            case ALLEGRO_EVENT_MOUSE_AXES:
+                m->move(event.mouse);
+                std::cout << m->get_x() << " " << m->get_y() << std::endl;
+                break;
+
             case ALLEGRO_EVENT_TIMER:
                 redraw = true;
                 break;
@@ -91,8 +102,16 @@ void application::run() {
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
             al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
-            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 0, 0));
+            al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
 
+            al_draw_filled_rectangle(250, 40, 390, 60, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 50,0, "OPCION 2");
+
+            al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
+
+            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));
             al_flip_display();
 
             redraw = false;

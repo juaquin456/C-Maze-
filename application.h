@@ -8,6 +8,7 @@
 
 class application {
 public:
+    application();
     void run();
 };
 
