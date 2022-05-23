@@ -13,7 +13,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Display.h"
-
+#include "button.h"
 void must_init(bool test, const char *description)
 {
     if(test) return;
@@ -23,6 +23,8 @@ void must_init(bool test, const char *description)
 }
 
 application::application() {
+
+    comp.push_back(std::make_shared<button>("JUGAR",440, 320, 640, 400));
 }
 
 void application::run() {
@@ -65,6 +67,7 @@ void application::run() {
     Keyboard * k = Keyboard::get_instance();
     Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
+
     while(1)
     {
         al_wait_for_event(queue, &event);
@@ -104,7 +107,8 @@ void application::run() {
         if(redraw && al_is_event_queue_empty(queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
+
+            /*al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
             al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
 
@@ -114,7 +118,9 @@ void application::run() {
             al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
 
-            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));
+            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));*/
+
+            comp[0]->draw();
             al_flip_display();
 
             redraw = false;
