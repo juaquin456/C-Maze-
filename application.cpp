@@ -12,6 +12,8 @@
 
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Display.h"
+
 void must_init(bool test, const char *description)
 {
     if(test) return;
@@ -38,8 +40,9 @@ void application::run() {
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
-    must_init(disp, "display");
+    auto &disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(1080, 720))->get();
+    //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
+    must_init(*disp, "display");
 
     ALLEGRO_FONT* font = al_create_builtin_font();
     must_init(font, "font");
@@ -47,7 +50,7 @@ void application::run() {
     must_init(al_init_primitives_addon(), "primitives");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_display_event_source(disp));
+    al_register_event_source(queue, al_get_display_event_source(*disp));
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_mouse_event_source());
 
@@ -119,7 +122,7 @@ void application::run() {
     }
 
     al_destroy_font(font);
-    al_destroy_display(disp);
+    al_destroy_display(*disp);
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 }

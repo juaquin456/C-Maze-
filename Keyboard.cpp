@@ -16,4 +16,3 @@ Keyboard *Keyboard::get_instance() {
 void Keyboard::update() {
     al_get_keyboard_state(ks);
 }
-
