@@ -23,11 +23,32 @@ void must_init(bool test, const char *description)
 }
 
 application::application() {
-
-    menu.push_back(std::make_shared<button>("JUGAR",440, 320, 640, 400));
+    // Inicializar vista del menú
+    //menu.push_back(std::make_shared<button>("JUGAR",440, 320, 640, 400));
 }
 
 void application::run() {
+    char mapa[20][20]= {"xxxxxxxxxxxxxxxxxxx",
+                        "x x  x     x      x",
+                        "x x xx xxx   xxxx x",
+                        "x   xx xxxxxxx    x",
+                        "xx x x x x  xxxxxxx",
+                        "x          x xxxxxx",
+                        "x x xxxx xxxx    xx",
+                        "x x xxxx xxxx xxxxx",
+                        "xxxxxx          xxx",
+                        "xx       xxx  xxx x",
+                        "xx  xxxxxxxx   x xx",
+                        "xxx    xxxxxxxxx xx",
+                        "xx  xxxx          x",
+                        "xx  x    xxxxxxxxxx",
+                        "x       xxxxxxxxxxx",
+                        "xx   xxx          x",
+                        "xx         xxxxxxxx",
+                        "xxx xxxxxx   xxxxxx",
+                        "x x xxxxxxxx   xxxx",
+                        "xxxxxxxxxxxxxxxxxxx"};
+
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
@@ -128,8 +149,15 @@ void application::run() {
             for(auto const e:menu){
                 e->draw();
             }
+            //Dibujar mapa
+            for(int i=0; i<20; i++){
+                for(int j=0; j<20; j++){
+                    if(mapa[i][j]=='x'){
+                        al_draw_filled_rectangle(i*35,j*35, (i+1)*35-5, (j+1)*35-5, al_map_rgb(0,255,255));
+                    }
+                }
+            }
             al_flip_display();
-
             redraw = false;
         }
     }
