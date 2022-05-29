@@ -9,7 +9,7 @@
 #include <memory>
 #include "components.h"
 class application {
-    std::vector<std::shared_ptr<components>> comp;
+    std::vector<std::shared_ptr<components>> menu;
 public:
     application();
     void run();
