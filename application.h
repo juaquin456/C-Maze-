@@ -7,9 +7,9 @@
 
 #include <vector>
 #include <memory>
-#include "components.h"
+#include "interface.h"
 class application {
-    std::vector<std::shared_ptr<components>> menu;
+    interface v;
 public:
     application();
     void run();

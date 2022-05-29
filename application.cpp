@@ -13,7 +13,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Display.h"
-#include "button.h"
+
 void must_init(bool test, const char *description)
 {
     if(test) return;
@@ -23,8 +23,7 @@ void must_init(bool test, const char *description)
 }
 
 application::application() {
-    // Inicializar vista del menú
-    //menu.push_back(std::make_shared<button>("JUGAR",440, 320, 640, 400));
+    v.render_vista(2);
 }
 
 void application::run() {
@@ -93,7 +92,6 @@ void application::run() {
     {
         al_wait_for_event(queue, &event);
         k->update();
-
         if(k->is_key_down(ALLEGRO_KEY_UP))
             y--;
         if(k->is_key_down(ALLEGRO_KEY_DOWN))
@@ -102,7 +100,6 @@ void application::run() {
             x--;
         if(k->is_key_down(ALLEGRO_KEY_RIGHT))
             x++;
-
         if(k->is_key_down(ALLEGRO_KEY_ESCAPE))
             done = true;
 
@@ -112,11 +109,16 @@ void application::run() {
                 m->move(event.mouse);
                 break;
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                for(auto const e:menu){
+                for(auto const e:v.getVista()){
                     if(e->is_on_bound()){
                         std::cout << "CAMBIO DE PANTALLA" << std::endl;
                     }
                 }
+                break;
+
+            case ALLEGRO_EVENT_KEY_DOWN:
+
+                break;
 
             case ALLEGRO_EVENT_TIMER:
                 redraw = true;
@@ -134,8 +136,8 @@ void application::run() {
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            /*al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
-            al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
+            /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
 
             al_draw_filled_rectangle(250, 40, 390, 60, al_map_rgb(255, 0, 0));
@@ -143,20 +145,20 @@ void application::run() {
 
             al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
+*/
+            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));
 
-            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));*/
-
-            for(auto const e:menu){
+            for(auto const e:v.getVista()){
                 e->draw();
             }
             //Dibujar mapa
-            for(int i=0; i<20; i++){
+            /*for(int i=0; i<20; i++){
                 for(int j=0; j<20; j++){
                     if(mapa[i][j]=='x'){
                         al_draw_filled_rectangle(i*35,j*35, (i+1)*35-5, (j+1)*35-5, al_map_rgb(0,255,255));
                     }
                 }
-            }
+            }*/
             al_flip_display();
             redraw = false;
         }

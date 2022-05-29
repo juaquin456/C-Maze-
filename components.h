@@ -19,19 +19,20 @@ public:
             text(t), x1(xi), y1(yi), x2(xf), y2(yf) {};
 
     virtual void draw() = 0;
-    virtual bool is_on_bound(){
-        Mouse * m = Mouse::getInstance();
+    virtual bool is_on_bound() {
+        Mouse *m = Mouse::getInstance();
         float x = m->get_x();
         float y = m->get_y();
 
-        if(x>x2 or x<x1){
+        if (x > x2 or x < x1) {
             return false;
         }
-        if(y<y1 or y>y2){
+        if (y < y1 or y > y2) {
             return false;
         }
         return true;
     }
+
 };
 
 
