@@ -17,7 +17,7 @@ C Maze ++ es un juego el que tendrás que demostrar tu habilidad para resolver l
           - El color del jugador y del oponente
 
  - Observar un ranking que guardará el número de victorias según el usuario y puntaje.
- - Salir del juego
+ - Salir del juego y jugar
 
 
 
