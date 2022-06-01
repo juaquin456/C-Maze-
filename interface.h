@@ -11,7 +11,7 @@
 
 #include "components.h"
 #include "button.h"
-
+#include "block.h"
 
 using namespace std;
 
@@ -30,7 +30,38 @@ class interface {
     }
 
     vector<std::shared_ptr<components>> create_mapa() {
+        vector<std::shared_ptr<components>> temp;
 
+        char mapa[20][20]= {"xxxxxxxxxxxxxxxxxxx",
+                            "x x  x     x      x",
+                            "x x xx xxx   xxxx x",
+                            "x   xx xxxxxxx    x",
+                            "xx x x x x  xxxxxxx",
+                            "x          x xxxxxx",
+                            "x x xxxx xxxx    xx",
+                            "x x xxxx xxxx xxxxx",
+                            "xxxxxx          xxx",
+                            "xx       xxx  xxx x",
+                            "xx  xxxxxxxx   x xx",
+                            "xxx    xxxxxxxxx xx",
+                            "xx  xxxx          x",
+                            "xx  x    xxxxxxxxxx",
+                            "x       xxxxxxxxxxx",
+                            "xx   xxx          x",
+                            "xx         xxxxxxxx",
+                            "xxx xxxxxx   xxxxxx",
+                            "x x xxxxxxxx   xxxx",
+                            "xxxxxxxxxxxxxxxxxxx"};
+
+        for(int i=0; i<20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (mapa[i][j] == 'x') {
+                    temp.push_back(make_shared<block>(i * 35, j * 35, (i + 1) * 35 - 5, (j + 1) * 35 - 5));
+                }
+            }
+        }
+
+        return temp;
     }
 
 public:
@@ -39,6 +70,9 @@ public:
             switch (n_interface) {
                 case 2:
                     interfaces.insert({n_interface, create_menu()});
+                    break;
+                case 3:
+                    interfaces.insert({n_interface, create_mapa()});
                     break;
             }
         }

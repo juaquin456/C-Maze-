@@ -11,9 +11,10 @@
 #include <allegro5/allegro_ttf.h>
 
 class textbox : public components{
+    const char* text;
     ALLEGRO_COLOR a = al_map_rgb_f(255,255,255);
 public:
-    using components::components;
+    textbox(const char *t, float xi, float yi, float xf, float yf): text(t), components(xi,yi,xf,yf) {};
 
     void draw() override{
         al_draw_rectangle(x1, y1, x2, y2, a, 0.1);

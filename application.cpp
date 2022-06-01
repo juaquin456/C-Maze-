@@ -27,26 +27,6 @@ application::application() {
 }
 
 void application::run() {
-    char mapa[20][20]= {"xxxxxxxxxxxxxxxxxxx",
-                        "x x  x     x      x",
-                        "x x xx xxx   xxxx x",
-                        "x   xx xxxxxxx    x",
-                        "xx x x x x  xxxxxxx",
-                        "x          x xxxxxx",
-                        "x x xxxx xxxx    xx",
-                        "x x xxxx xxxx xxxxx",
-                        "xxxxxx          xxx",
-                        "xx       xxx  xxx x",
-                        "xx  xxxxxxxx   x xx",
-                        "xxx    xxxxxxxxx xx",
-                        "xx  xxxx          x",
-                        "xx  x    xxxxxxxxxx",
-                        "x       xxxxxxxxxxx",
-                        "xx   xxx          x",
-                        "xx         xxxxxxxx",
-                        "xxx xxxxxx   xxxxxx",
-                        "x x xxxxxxxx   xxxx",
-                        "xxxxxxxxxxxxxxxxxxx"};
 
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
@@ -111,7 +91,7 @@ void application::run() {
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
                 for(auto const e:v.getVista()){
                     if(e->is_on_bound()){
-                        std::cout << "CAMBIO DE PANTALLA" << std::endl;
+                        v.render_vista(3);
                     }
                 }
                 break;

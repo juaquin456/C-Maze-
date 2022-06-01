@@ -9,14 +9,13 @@
 #include "Mouse.h"
 class components {
 protected:
-    const char *text;
     float x1 = 0;
     float y1 = 0;
     float x2 = 0;
     float y2 = 0;
 public:
-    components(const char *t, float xi, float yi, float xf, float yf) :
-            text(t), x1(xi), y1(yi), x2(xf), y2(yf) {};
+    components(float xi, float yi, float xf, float yf) :
+            x1(xi), y1(yi), x2(xf), y2(yf) {};
 
     virtual void draw() = 0;
     virtual bool is_on_bound() {

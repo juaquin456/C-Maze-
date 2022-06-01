@@ -14,9 +14,10 @@
 #include <allegro5/allegro_ttf.h>
 #include <iostream>
 class button: public  components {
+    const char * text;
     ALLEGRO_COLOR a = al_map_rgb_f(255,255,255);
 public:
-    using components::components;
+    button(const char *t, float xi, float yi, float xf, float yf): text(t), components(xi,yi,xf,yf) {};
 
     void draw() override{
         if(this->is_on_bound()){
