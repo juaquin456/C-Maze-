@@ -12,6 +12,7 @@
 #include "components.h"
 #include "button.h"
 #include "block.h"
+#include "textbox.h"
 
 using namespace std;
 
@@ -20,12 +21,14 @@ class interface {
     unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map
 
     vector<std::shared_ptr<components>> create_input() {
-
+        vector<std::shared_ptr<components>> temp;
+        temp.push_back(make_shared<textbox>("", 440, 320, 640, 400,1,2));
+        return temp;
     }
 
     vector<std::shared_ptr<components>> create_menu() {
         vector<std::shared_ptr<components>> temp;
-        temp.push_back(make_shared<button>("JUGAR", 440, 320, 640, 400));
+        temp.push_back(make_shared<button>("JUGAR", 440, 320, 640, 400,2,3));
         return temp;
     }
 
@@ -68,6 +71,9 @@ public:
     void render_vista(int n_interface) {
         if (interfaces.find(n_interface) == interfaces.end()) {
             switch (n_interface) {
+                case 1:
+                    interfaces.insert({n_interface, create_input()});
+                    break;
                 case 2:
                     interfaces.insert({n_interface, create_menu()});
                     break;

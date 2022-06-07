@@ -23,7 +23,7 @@ void must_init(bool test, const char *description)
 }
 
 application::application() {
-    v.render_vista(2);
+    v.render_vista(1);
 }
 
 void application::run() {
@@ -91,13 +91,16 @@ void application::run() {
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
                 for(auto const e:v.getVista()){
                     if(e->is_on_bound()){
-                        v.render_vista(3);
+                        v.render_vista(e->is_clicked());
                     }
                 }
                 break;
 
             case ALLEGRO_EVENT_KEY_DOWN:
-
+                for(auto const e:v.getVista()){
+                    if(e->is_press_key())
+                        v.render_vista(e->key_event(event.keyboard.keycode));
+                }
                 break;
 
             case ALLEGRO_EVENT_TIMER:
