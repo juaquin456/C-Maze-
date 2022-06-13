@@ -30,7 +30,9 @@ class interface {
 
     vector<std::shared_ptr<components>> create_menu() {
         vector<std::shared_ptr<components>> temp;
+        temp.push_back(make_shared<button>("RANKING", 230, 320, 430, 400,2,3));
         temp.push_back(make_shared<button>("JUGAR", 440, 320, 640, 400,2,3));
+        temp.push_back(make_shared<button>("PERZONALIZAR", 650, 320, 850, 400,2,3));
         return temp;
     }
 
@@ -69,6 +71,7 @@ class interface {
         return temp;
     }
 
+
 public:
     void render_vista(int n_interface) {
         if (interfaces.find(n_interface) == interfaces.end()) {
@@ -80,6 +83,9 @@ public:
                     interfaces.insert({n_interface, create_menu()});
                     break;
                 case 3:
+                    interfaces.insert({n_interface, create_mapa()});
+                    break;
+                case 4:
                     interfaces.insert({n_interface, create_mapa()});
                     break;
             }
