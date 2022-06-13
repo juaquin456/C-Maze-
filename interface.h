@@ -8,7 +8,7 @@
 #include <vector>
 #include <unordered_map>
 #include <memory>
-
+#include <functional>
 #include "components.h"
 #include "button.h"
 #include "block.h"
@@ -18,11 +18,13 @@ using namespace std;
 
 class interface {
     vector<std::shared_ptr<components>> *data = nullptr;
+    int current_v;
     unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map
 
     vector<std::shared_ptr<components>> create_input() {
         vector<std::shared_ptr<components>> temp;
-        temp.push_back(make_shared<textbox>("", 440, 320, 640, 400,1,2));
+        function<void()> f = [this](){this->render_vista(2);};
+        temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, f));
         return temp;
     }
 
@@ -82,12 +84,18 @@ public:
                     break;
             }
         }
+        current_v = n_interface;
         data = &interfaces.at(n_interface);
     }
 
     vector<std::shared_ptr<components>> getVista() {
         return *data;
     }
+
+    int get_vista() const{
+        return current_v;
+    }
+
 };
 
 

@@ -20,8 +20,8 @@ public:
     virtual void draw() = 0;
     virtual bool is_on_bound() {return false;};
     virtual int is_clicked() {};
-    virtual int is_press_key() {return false;};
-    virtual int key_event(int key){};
+    virtual bool is_press_key() {return false;};
+    virtual void key_event(int key){};
 };
 
 

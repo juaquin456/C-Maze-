@@ -99,7 +99,7 @@ void application::run() {
             case ALLEGRO_EVENT_KEY_DOWN:
                 for(auto const e:v.getVista()){
                     if(e->is_press_key())
-                        v.render_vista(e->key_event(event.keyboard.keycode));
+                        e->key_event(event.keyboard.keycode);
                 }
                 break;
 
