@@ -13,6 +13,9 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Display.h"
+#include "item.h"
+#include "player.h"
+
 
 void must_init(bool test, const char *description)
 {
@@ -67,6 +70,7 @@ void application::run() {
     Keyboard * k = Keyboard::get_instance();
     Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
+    player P(6);
 
     while(1)
     {
@@ -129,6 +133,7 @@ void application::run() {
             al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
 */
+
             al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));
 
             for(auto const e:v.getVista()){
@@ -142,6 +147,10 @@ void application::run() {
                     }
                 }
             }*/
+
+            P.draw_items();
+            P.draw();
+            P.move();
             al_flip_display();
             redraw = false;
         }
