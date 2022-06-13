@@ -46,7 +46,7 @@ int tsp(pair<int,int> init, int pos, int visited, vector<vector<int>>& state, ve
 {
 
     if(visited == ((1 << cont) - 1))
-        return dist[init.f][init.s][pos]; // volver a la ciudad de partida
+        return 0; // volver a la ciudad de partida
 
     if(state[pos][visited] != INT_MAX)
         return state[pos][visited];

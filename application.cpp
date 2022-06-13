@@ -63,10 +63,6 @@ void application::run() {
     bool redraw = true;
     ALLEGRO_EVENT event;
 
-    float x, y;
-    x = 100;
-    y = 100;
-
     Keyboard * k = Keyboard::get_instance();
     Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
@@ -76,14 +72,6 @@ void application::run() {
     {
         al_wait_for_event(queue, &event);
         k->update();
-        if(k->is_key_down(ALLEGRO_KEY_UP))
-            y--;
-        if(k->is_key_down(ALLEGRO_KEY_DOWN))
-            y++;
-        if(k->is_key_down(ALLEGRO_KEY_LEFT))
-            x--;
-        if(k->is_key_down(ALLEGRO_KEY_RIGHT))
-            x++;
         if(k->is_key_down(ALLEGRO_KEY_ESCAPE))
             done = true;
 
@@ -123,7 +111,6 @@ void application::run() {
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", x, y);
             /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
 
@@ -133,8 +120,6 @@ void application::run() {
             al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
 */
-
-            al_draw_filled_rectangle(x, y, x + 10, y + 10, al_map_rgb(255, 255, 255));
 
             for(auto const e:v.getVista()){
                 e->draw();

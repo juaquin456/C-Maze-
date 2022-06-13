@@ -42,13 +42,13 @@ public:
     void move(){
         k->update();
         if(k->is_key_down(ALLEGRO_KEY_UP))
-            y--;
+            y-=2;
         if(k->is_key_down(ALLEGRO_KEY_DOWN))
-            y++;
+            y+=2;
         if(k->is_key_down(ALLEGRO_KEY_LEFT))
-            x--;
+            x-=2;
         if(k->is_key_down(ALLEGRO_KEY_RIGHT))
-            x++;
+            x+=2;
 
 };
 
