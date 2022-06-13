@@ -1,5 +1,5 @@
 
-![image](https://user-images.githubusercontent.com/102132128/170156239-a93ec1ab-f4a3-4958-8814-7b9c295605f6.png)
+<img src="https://user-images.githubusercontent.com/102132128/170156239-a93ec1ab-f4a3-4958-8814-7b9c295605f6.png" alt="drawing" width="500"/>
 
 # Grupo 6
 - Juaquin Estefano Remon Flores
