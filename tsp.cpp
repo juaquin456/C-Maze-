@@ -46,7 +46,7 @@ int tsp(pair<int,int> init, int pos, int visited, vector<vector<int>>& state, ve
 {
 
     if(visited == ((1 << cont) - 1))
-        return dist[init.f][init.s][pos]; // volver a la ciudad de partida
+        return 0; // no volver a la ciudad de partida
 
     if(state[pos][visited] != INT_MAX)
         return state[pos][visited];
@@ -64,7 +64,6 @@ int tsp(pair<int,int> init, int pos, int visited, vector<vector<int>>& state, ve
             parent[pos][visited] = i;
         }
     }
-
     return state[pos][visited]=ans;
 
 }
@@ -83,27 +82,58 @@ void init(char mapa[][N], int n, int m, vector<pair<int,int>> &cities){
 
     for (int i = 0; i < cities.size(); i++){
         bfs(mapa, i, cities);
-        // for(int j = 0; j < n; j++){
-        //     for(int k = 0; k < m; k++){
-        //         cout<<dist[j][k][i]<<" ";
-        //     }
-        //     cout<<endl;
-        // }
         for(int j = 0; j < n; j++){
             for(int k = 0; k < m; k++){
                 vis[j][k]=false;
             }
         }
-        // cout<<cities[i].f<<" "<<cities[i].s<<endl;
-        // for(int j = 0; j < n; j++){
-        //     for(int k = 0; k < m; k++){
-        //         cout<<previousStep[j][k][i]<<" ";
-        //     }
-        //     cout<<endl;
-        // }
-        // cout<<"***************************"<<endl;
     }
 
+}
+
+
+vector<pair<int,int>> getPath(pair<int,int> begin, char mapa[][N], int n, int m){
+    // init 
+    vector<pair<int,int>> cities;
+    init(mapa, n, m, cities);
+    int cont = cities.size();
+    map<pair<int,int>,int> ids;
+    for(int i = 0; i < cont; i++)
+        ids[cities[i]] = i;
+    // tsp
+    vector<vector<int>> state(n, vector<int>(1 << n, INT_MAX));
+    vector<vector<int>> parent(n, vector<int>(1 << n, 0));
+    int ans = tsp(begin, 0, 1, state, parent, cont, cities);
+    // find path tsp
+    vector<pair<int,int>> camino;
+    int pos = 0;
+    int visited = 1;
+    while(visited != (1 << cont) - 1){
+        camino.push_back(cities[pos]);
+        int next = parent[pos][visited];
+        visited |= (1 << next);
+        pos = next;
+    }
+    camino.push_back(cities[pos]);
+    int sz=camino.size();
+    // get path
+    vector<pair<int,int>> path;
+    for(int i=0;i<sz-1;i++){
+        vector<pair<int,int>> steps;
+        pair<int,int> begin,end;
+        begin = camino[i];
+        end = camino[i+1];
+        while (end != begin) {
+            int p = previousStep[end.f][end.s][ids[begin]];
+            steps.push_back({end.f, end.s});
+            end = {end.f - dx[p], end.s - dy[p]};
+        }
+        reverse(steps.begin(), steps.end());
+        for(auto x:steps){
+            path.push_back(x);
+        }
+    }
+    return path;
 }
 int main(){
     int n=20, m=20;
@@ -119,7 +149,7 @@ int main(){
                         "xx    #  xxx  xxx x", // (9,6)
                         "xx  xxxxxxxx     xx",
                         "xxx    xxxxxxxxx xx",
-                        "xx  xxxx    #     x", // (12,12)
+                        "xx  xxxx          x", // (12,12)
                         "xx  x    xxxxxxxxxx", 
                         "x   #   xxxxxxxxxxx", // (14,4)
                         "xx   xxx     #    x", // (15,13)
@@ -128,70 +158,11 @@ int main(){
                         "x x xxxxxxxx   xxxx",
                         "xxxxxxxxxxxxxxxxxxx"
                 };
-
-    vector<pair<int,int>> cities;
-
-    init(mapa, n, m, cities);
-    map<pair<int,int>,int> ids;
-    for(int i = 0; i < cities.size(); i++)
-        ids[cities[i]] = i;
-
-    int cont = cities.size();
- 
-    vector<vector<int>> state(n, vector<int>(1 << n, INT_MAX));
-    vector<vector<int>> parent(n, vector<int>(1 << n, 0));
-    pair<int,int> init = cities[0];
-    cout << tsp(init, 0, 1, state, parent, cont, cities) << endl;
-    vector<pair<int,int>> camino;
-    // find path tsp
-    int pos = 0;
-    int visited = 1;
-    while(visited != (1 << cont) - 1){
-        camino.push_back(cities[pos]);
-        int next = parent[pos][visited];
-        visited |= (1 << next);
-        pos = next;
+    pair<int,int> begin={1,8};
+    vector<pair<int,int>> path = getPath(begin, mapa, n, m);
+    for(auto x:path){
+        cout << x.f << " " << x.s << endl;
     }
-    camino.push_back(cities[pos]);
-
-    int sz=camino.size();
-    for(int i = 0; i < sz; ++i){
-        cout << camino[i].f << " " << camino[i].s << endl;
-    }
-    cout<<"***************************"<<endl;
-    char c='1';
-    for(int i=0;i<sz;i++){
-        vector<pair<int,int>> steps;
-        pair<int,int> begin,end;
-        if(i==sz-1){
-            begin = camino[i];
-            end = camino[0];
-        }else {
-            begin = camino[i];
-            end = camino[i+1];
-        }
-        while (end != begin) {
-            int p = previousStep[end.f][end.s][ids[begin]];
-            //cout<<p<<endl;
-            steps.push_back({end.f, end.s});
-            end = {end.f - dx[p], end.s - dy[p]};
-        }
-        reverse(steps.begin(), steps.end());
-        for(auto x:steps){
-            camino.push_back(x);
-            //mapa[x.f][x.s]=c;
-            cout<<x.f<<" "<<x.s<<endl;
-        }
-        cout<<steps.size()<<endl;
-        cout<<"***************************"<<endl;
-        //c++;
-    }
-    // for(int i=0;i<n;i++){
-    //     for(int j=0;j<m;j++){
-    //         cout<<mapa[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
     return 0;
     
 }
