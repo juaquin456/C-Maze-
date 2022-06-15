@@ -67,8 +67,10 @@ void application::run() {
     Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
     player P(6);
+    P.alter_map();
     P.draw_items();
     auto acv = P.draw_items();
+
 
 
 

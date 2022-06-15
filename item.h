@@ -18,7 +18,7 @@ class item {
 public:
     item(int x,int y):x1(x),y1(y){};
     void draw() {
-        al_draw_filled_circle(x1,y1,8,a);
+        al_draw_filled_circle(x1,y1,4,a);
     }
 
 };

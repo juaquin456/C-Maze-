@@ -7,14 +7,14 @@
 int ale_x() {
     int iSecret;
     srand (time(NULL));
-    iSecret = rand() % 70 + 10;
+    iSecret = rand() % 31 + 1;
     return iSecret;
 }
 
 int ale_y() {
     int iSecret;
 
-    iSecret = rand() % 70 + 10;
+    iSecret = rand() % 31 + 1;
     return iSecret;
 
 }

@@ -24,42 +24,57 @@ class player {
     int cantidad_items;
     float x = 100;
     float y = 100;
-    char mapa[20][20]= {"xxxxxxxxxxxxxxxxxxx",
-                        "x x  x     x      x",
-                        "x x xx xxx   xxxx x",
-                        "x   xx xxxxxxx    x",
-                        "xx x x x x  xxxxxxx",
-                        "x        # x xxxxxx",
-                        "x x xxxx xxxx    xx",
-                        "x x xxxx xxxx xxxxx",
-                        "xxxxxx     #    xxx",
-                        "xx   #   xxx  xxx x",
-                        "xx  xxxxxxxx   x xx",
-                        "xxx    xxxxxxxxx xx",
-                        "xx  xxxx     #    x",
-                        "xx  x    xxxxxxxxxx",
-                        "x       xxxxxxxxxxx",
-                        "xx   xxx     #    x",
-                        "xx    #    xxxxxxxx",
-                        "xxx xxxxxx   xxxxxx",
-                        "x x xxxxxxxx   xxxx",
-                        "xxxxxxxxxxxxxxxxxxx"};
+    char mapa[20][32]= {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        "x                             x",
+                        "x                             x",
+                        "x   xx xxxxxxx    x            ",
+                        "xx x x x x  xxxxxxx            ",
+                        "x          x xxxxxx            ",
+                        "x x xxxx xxxx    xx            ",
+                        "x x xxxx xxxx xxxxx            ",
+                        "xxxxxx          xxx            ",
+                        "xx       xxx  xxx x            ",
+                        "xx  xxxxxxxx   x xx           ",
+                        "xxx    xxxxxxxxx xx           ",
+                        "xx  xxxx          x           ",
+                        "xx  x    xxxxxxxxxx           ",
+                        "x       xxxxxxxxxxx           ",
+                        "xx   xxx          x           ",
+                        "xx         xxxxxxxx           ",
+                        "xxx xxxxxx   xxxxxx           ",
+                        "x x xxxxxxxx   xxxx           ",
+                        "xxxxxxxxxxxxxxxxxxx xxxxxxxx  "};
 
 public:
     player(int c):cantidad_items(c){};
     void draw() {
         al_draw_filled_rectangle(x, y, x + 10, y + 10, a);
     }
+
+    void alter_map(){
+        for(int i=1; i<20;) {
+            int a = ale_y();
+            if(mapa[i][a]!='x'){
+                mapa[i][a] = '#';
+                i+=4;
+            }
+
+
+
+        }
+
+
+    }
     vector<std::shared_ptr<item>> draw_items(){
         vector<std::shared_ptr<item>> temp;
 
 
         for(int i=0; i<20; i++) {
-            for (int j = 0; j < 20; j++) {
+            for (int j = 0; j < 32; j++) {
                 if (mapa[i][j] == '#') {
 
 
-                    temp.push_back(make_shared<item>(i*35 +10, j*35 +10));
+                    temp.push_back(make_shared<item>(j*20 +8, i*20 +8));
 
                 }
             }
