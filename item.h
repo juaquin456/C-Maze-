@@ -13,7 +13,7 @@ class item {
     int x1 = 0;
     int y1 = 0;
 
-    ALLEGRO_COLOR a = al_map_rgb_f(255,0,0);
+    ALLEGRO_COLOR a = al_map_rgb_f(0,255,0);
 
 public:
     item(int x,int y):x1(x),y1(y){};

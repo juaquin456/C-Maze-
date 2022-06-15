@@ -4,9 +4,17 @@
 
 #include "player.h"
 
-int ale() {
-    int iSecret, iGuess;
+int ale_x() {
+    int iSecret;
     srand (time(NULL));
-    iSecret = rand() % 700 + 100;
+    iSecret = rand() % 70 + 10;
     return iSecret;
+}
+
+int ale_y() {
+    int iSecret;
+
+    iSecret = rand() % 70 + 10;
+    return iSecret;
+
 }

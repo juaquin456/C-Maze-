@@ -13,6 +13,7 @@
 #include "button.h"
 #include "block.h"
 #include "textbox.h"
+#include "player.h"
 
 using namespace std;
 
@@ -40,7 +41,7 @@ class interface {
         vector<std::shared_ptr<components>> temp;
 
         char mapa[20][20]= {"xxxxxxxxxxxxxxxxxxx",
-                            "x x  x     x      x",
+                            "xxxxxxxxxxxxxxxxx x",
                             "x x xx xxx   xxxx x",
                             "x   xx xxxxxxx    x",
                             "xx x x x x  xxxxxxx",
@@ -67,6 +68,8 @@ class interface {
                 }
             }
         }
+
+
 
         return temp;
     }

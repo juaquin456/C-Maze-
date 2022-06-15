@@ -67,6 +67,11 @@ void application::run() {
     Mouse * m = Mouse::getInstance();
     al_start_timer(timer);
     player P(6);
+    P.draw_items();
+    auto acv = P.draw_items();
+
+
+
 
     while(1)
     {
@@ -133,9 +138,14 @@ void application::run() {
                 }
             }*/
 
-            P.draw_items();
+            for(auto const i:acv){
+                i->draw();
+            }
+
             P.draw();
             P.move();
+
+
             al_flip_display();
             redraw = false;
         }
