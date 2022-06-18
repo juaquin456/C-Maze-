@@ -13,10 +13,10 @@ class item {
     int x1 = 0;
     int y1 = 0;
 
-    ALLEGRO_COLOR a = al_map_rgb_f(0,255,0);
+    ALLEGRO_COLOR a ;
 
 public:
-    item(int x,int y):x1(x),y1(y){};
+    item(int x,int y,ALLEGRO_COLOR color):x1(x),y1(y),a(color){};
     void draw() {
         al_draw_filled_circle(x1,y1,4,a);
     }

@@ -7,6 +7,9 @@
 #include <map>
 #include <algorithm>
 #include "interface.h"
+#include "player.h"
+
+
 
 void interface::render_vista(int n_interface) {
     if (interfaces.find(n_interface) == interfaces.end()) {
@@ -19,6 +22,7 @@ void interface::render_vista(int n_interface) {
                 break;
             case 3:
                 interfaces.insert({n_interface, create_mapa()});
+
                 break;
             case 4:
                 interfaces.insert({n_interface, create_rank()});
@@ -86,6 +90,9 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
             }
         }
     }
+
+
+
 
 
 
