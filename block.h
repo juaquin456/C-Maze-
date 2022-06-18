@@ -12,9 +12,7 @@ class block: public components{
 public:
     using components::components;
 
-    void draw() override{
-        al_draw_filled_rectangle(x1, y1, x2, y2, a);
-    }
+    void draw() override;
 
 };
 

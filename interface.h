@@ -14,96 +14,30 @@
 #include "block.h"
 #include "textbox.h"
 #include "player.h"
+#include "label.h"
 
 using namespace std;
 
 class interface {
+    int H;
+    int V;
     vector<std::shared_ptr<components>> *data = nullptr;
     int current_v;
-    unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map
+    unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map, 4:rank
 
-    vector<std::shared_ptr<components>> create_input() {
-        vector<std::shared_ptr<components>> temp;
-        function<void()> f = [this](){this->render_vista(2);};
-        temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, f));
-        return temp;
-    }
+    vector<std::shared_ptr<components>> create_input();
 
-    vector<std::shared_ptr<components>> create_menu() {
-        vector<std::shared_ptr<components>> temp;
-        temp.push_back(make_shared<button>("RANKING", 230, 320, 430, 400,2,3));
-        temp.push_back(make_shared<button>("JUGAR", 440, 320, 640, 400,2,3));
-        temp.push_back(make_shared<button>("PERZONALIZAR", 650, 320, 850, 400,2,3));
-        return temp;
-    }
+    vector<std::shared_ptr<components>> create_menu();
 
-    vector<std::shared_ptr<components>> create_mapa() {
-        vector<std::shared_ptr<components>> temp;
+    vector<std::shared_ptr<components>> create_mapa();
 
-        char mapa[20][32]= {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                            "x                             x",
-                            "x                             x",
-                            "x   xx xxxxxxx    x            ",
-                            "xx x x x x  xxxxxxx            ",
-                            "x          x xxxxxx            ",
-                            "x x xxxx xxxx    xx            ",
-                            "x x xxxx xxxx xxxxx            ",
-                            "xxxxxx          xxx            ",
-                            "xx       xxx  xxx x            ",
-                            "xx  xxxxxxxx   x xx           ",
-                            "xxx    xxxxxxxxx xx           ",
-                            "xx  xxxx          x           ",
-                            "xx  x    xxxxxxxxxx           ",
-                            "x       xxxxxxxxxxx           ",
-                            "xx   xxx          x           ",
-                            "xx         xxxxxxxx           ",
-                            "xxx xxxxxx   xxxxxx           ",
-                            "x x xxxxxxxx   xxxx           ",
-                            "xxxxxxxxxxxxxxxxxxx xxxxxxxx  "};
-
-        for(int i=0; i<20; i++) {
-            for (int j = 0; j < 32; j++) {
-                if (mapa[i][j] == 'x') {
-                    temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20 - 3));
-                }
-            }
-        }
-
-
-
-        return temp;
-    }
-
-
+    vector<std::shared_ptr<components>> create_rank();
 public:
-    void render_vista(int n_interface) {
-        if (interfaces.find(n_interface) == interfaces.end()) {
-            switch (n_interface) {
-                case 1:
-                    interfaces.insert({n_interface, create_input()});
-                    break;
-                case 2:
-                    interfaces.insert({n_interface, create_menu()});
-                    break;
-                case 3:
-                    interfaces.insert({n_interface, create_mapa()});
-                    break;
-                case 4:
-                    interfaces.insert({n_interface, create_mapa()});
-                    break;
-            }
-        }
-        current_v = n_interface;
-        data = &interfaces.at(n_interface);
-    }
-
-    vector<std::shared_ptr<components>> getVista() {
-        return *data;
-    }
-
-    int get_vista() const{
-        return current_v;
-    }
+    interface() = default;
+    interface(int h, int v);
+    void render_vista(int n_interface);
+    vector<std::shared_ptr<components>> getVista();
+    int get_vista() const;
 
 };
 

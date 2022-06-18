@@ -9,6 +9,8 @@
 #include <memory>
 #include "interface.h"
 class application {
+    int H = 1080;
+    int V = 720;
     interface v;
 public:
     application();

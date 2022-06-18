@@ -26,6 +26,7 @@ void must_init(bool test, const char *description)
 }
 
 application::application() {
+    v = interface(H,V);
     v.render_vista(1);
 }
 
@@ -45,7 +46,7 @@ void application::run() {
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    auto &disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(1080, 720))->get();
+    auto &disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(H, V))->get();
     //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
     must_init(*disp, "display");
 
@@ -90,7 +91,7 @@ void application::run() {
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
                 for(auto const e:v.getVista()){
                     if(e->is_on_bound()){
-                        v.render_vista(e->is_clicked());
+                        e->click_event();
                     }
                 }
                 break;
