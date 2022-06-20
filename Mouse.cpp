@@ -5,7 +5,7 @@
 #include "Mouse.h"
 
 Mouse *Mouse::getInstance() {
-    if(instance == nullptr) instance = new Mouse();
+    if (instance == nullptr) instance = new Mouse();
     return instance;
 }
 

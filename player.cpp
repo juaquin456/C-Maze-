@@ -6,7 +6,7 @@
 
 int ale_x() {
     int iSecret;
-    srand (time(NULL));
+    srand(time(NULL));
     iSecret = rand() % 31 + 1;
     return iSecret;
 }

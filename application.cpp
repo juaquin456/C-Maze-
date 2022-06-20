@@ -17,16 +17,15 @@
 #include "player.h"
 
 
-void must_init(bool test, const char *description)
-{
-    if(test) return;
+void must_init(bool test, const char *description) {
+    if (test) return;
 
     printf("couldn't initialize %s\n", description);
     exit(1);
 }
 
 application::application() {
-    v = interface(H,V);
+    v = interface(H, V);
     v.render_vista(1);
 }
 
@@ -36,21 +35,21 @@ void application::run() {
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
 
-    ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
+    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
     must_init(timer, "timer");
 
-    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     must_init(queue, "queue");
 
     al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    auto &disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(H, V))->get();
+    auto &disp = Display<ALLEGRO_DISPLAY *>::getInstance(al_create_display(H, V))->get();
     //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
     must_init(*disp, "display");
 
-    ALLEGRO_FONT* font = al_create_builtin_font();
+    ALLEGRO_FONT *font = al_create_builtin_font();
     must_init(font, "font");
 
     must_init(al_init_primitives_addon(), "primitives");
@@ -64,8 +63,8 @@ void application::run() {
     bool redraw = true;
     ALLEGRO_EVENT event;
 
-    Keyboard * k = Keyboard::get_instance();
-    Mouse * m = Mouse::getInstance();
+    Keyboard *k = Keyboard::get_instance();
+    Mouse *m = Mouse::getInstance();
     al_start_timer(timer);
     player P(6);
     P.alter_map();
@@ -73,32 +72,27 @@ void application::run() {
     auto acv = P.draw_items();
 
 
-
-
-
-    while(1)
-    {
+    while (1) {
         al_wait_for_event(queue, &event);
         k->update();
-        if(k->is_key_down(ALLEGRO_KEY_ESCAPE))
+        if (k->is_key_down(ALLEGRO_KEY_ESCAPE))
             done = true;
 
-        switch(event.type)
-        {
+        switch (event.type) {
             case ALLEGRO_EVENT_MOUSE_AXES:
                 m->move(event.mouse);
                 break;
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                for(auto const e:v.getVista()){
-                    if(e->is_on_bound()){
+                for (auto const e: v.getVista()) {
+                    if (e->is_on_bound()) {
                         e->click_event();
                     }
                 }
                 break;
 
             case ALLEGRO_EVENT_KEY_DOWN:
-                for(auto const e:v.getVista()){
-                    if(e->is_press_key())
+                for (auto const e: v.getVista()) {
+                    if (e->is_press_key())
                         e->key_event(event.keyboard.keycode);
                 }
                 break;
@@ -112,11 +106,10 @@ void application::run() {
                 break;
         }
 
-        if(done)
+        if (done)
             break;
 
-        if(redraw && al_is_event_queue_empty(queue))
-        {
+        if (redraw && al_is_event_queue_empty(queue)) {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
@@ -129,7 +122,7 @@ void application::run() {
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
 */
 
-            for(auto const e:v.getVista()){
+            for (auto const e: v.getVista()) {
                 e->draw();
             }
             //Dibujar mapa
@@ -141,7 +134,7 @@ void application::run() {
                 }
             }*/
 
-            for(auto const i:acv){
+            for (auto const i: acv) {
                 i->draw();
             }
 

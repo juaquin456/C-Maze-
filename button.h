@@ -22,8 +22,11 @@ public:
     button(const char *t, float xi, float yi, float xf, float yf, std::function<void()> &f) : text(t),
                                                                                               components(xi, yi, xf,
                                                                                                          yf), f(f) {};
+
     void draw() override;
+
     bool is_on_bound() override;
+
     void click_event() override;
 
 };

@@ -1,7 +1,6 @@
 #include "application.h"
 
-int main()
-{
+int main() {
     application app;
     app.run();
 

@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Mouse.h"
+
 class components {
 protected:
     float x1 = 0;
@@ -18,10 +19,14 @@ public:
             x1(xi), y1(yi), x2(xf), y2(yf) {};
 
     virtual void draw() = 0;
-    virtual bool is_on_bound() {return false;};
+
+    virtual bool is_on_bound() { return false; };
+
     virtual void click_event() {};
-    virtual bool is_press_key() {return false;};
-    virtual void key_event(int key){};
+
+    virtual bool is_press_key() { return false; };
+
+    virtual void key_event(int key) {};
 };
 
 

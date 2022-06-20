@@ -6,20 +6,23 @@
 #define PROYECTO_FINAL_PROYECTO_GRUPO6_DISPLAY_H
 
 #include <memory>
+
 template<typename T>
 class Display {
-     std::shared_ptr<T> data {};
-    inline static Display<T> * instance = nullptr;
+    std::shared_ptr<T> data{};
+    inline static Display<T> *instance = nullptr;
 
     template<typename ...Params>
-    Display(Params ...params): data(std::make_shared<T>(params...)){}
+    Display(Params ...params): data(std::make_shared<T>(params...)) {}
+
 public:
     template<typename ...Params>
-    static Display<T> * getInstance(Params ...params){
-        if (instance== nullptr) instance = new Display<T>(params...);
+    static Display<T> *getInstance(Params ...params) {
+        if (instance == nullptr) instance = new Display<T>(params...);
         return instance;
     }
-    std::shared_ptr<T>& get(){
+
+    std::shared_ptr<T> &get() {
         return data;
     }
 };

@@ -8,22 +8,25 @@
 #include <allegro5/allegro5.h>
 
 class Mouse {
-    inline static Mouse * instance = nullptr;
+    inline static Mouse *instance = nullptr;
     float x, y;
+
     Mouse();
+
 public:
-    static Mouse* getInstance();
+    static Mouse *getInstance();
 
     template<typename T>
-    void move(T position){
+    void move(T position) {
         x = position.x;
         y = position.y;
     }
 
-    float get_x(){
+    float get_x() {
         return x;
     }
-    float get_y(){
+
+    float get_y() {
         return y;
     }
 };

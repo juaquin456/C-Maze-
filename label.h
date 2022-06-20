@@ -10,11 +10,12 @@
 #include <allegro5/allegro_ttf.h>
 #include "components.h"
 
-class label: public components{
+class label : public components {
     std::basic_string<char> text;
     ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 255);
 public:
     label(std::basic_string<char> t, float xi, float yi, float xf, float yf) : text(t), components(xi, yi, xf, yf) {};
+
     void draw() override;
 };
 

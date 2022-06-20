@@ -7,8 +7,9 @@
 
 #include "components.h"
 #include<allegro5/allegro_primitives.h>
-class block: public components{
-    ALLEGRO_COLOR a = al_map_rgb_f(255,255,255);
+
+class block : public components {
+    ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 255);
 public:
     using components::components;
 

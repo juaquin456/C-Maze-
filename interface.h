@@ -32,11 +32,16 @@ class interface {
     vector<std::shared_ptr<components>> create_mapa();
 
     vector<std::shared_ptr<components>> create_rank();
+
 public:
     interface() = default;
+
     interface(int h, int v);
+
     void render_vista(int n_interface);
+
     vector<std::shared_ptr<components>> getVista();
+
     int get_vista() const;
 
 };

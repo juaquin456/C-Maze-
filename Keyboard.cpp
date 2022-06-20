@@ -9,7 +9,7 @@ Keyboard::Keyboard() {
 }
 
 Keyboard *Keyboard::get_instance() {
-    if (instance== nullptr) instance = new Keyboard();
+    if (instance == nullptr) instance = new Keyboard();
     return instance;
 }
 

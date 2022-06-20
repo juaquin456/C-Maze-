@@ -9,15 +9,18 @@
 #include <allegro5/allegro5.h>
 
 class Keyboard {
-    inline static Keyboard* instance;
-    ALLEGRO_KEYBOARD_STATE* ks = nullptr;
+    inline static Keyboard *instance;
+    ALLEGRO_KEYBOARD_STATE *ks = nullptr;
+
     Keyboard();
+
 public:
-    static Keyboard* get_instance();
+    static Keyboard *get_instance();
+
     void update();
 
     template<typename T>
-    bool is_key_down(T keycode){
+    bool is_key_down(T keycode) {
         return al_key_down(ks, keycode);
     }
 
