@@ -15,6 +15,8 @@
 #include "Display.h"
 #include "item.h"
 #include "player.h"
+#include "playerA.h"
+#include "playerB.h"
 
 
 void must_init(bool test, const char *description) {
@@ -66,9 +68,13 @@ void application::run() {
     Keyboard *k = Keyboard::get_instance();
     Mouse *m = Mouse::getInstance();
     al_start_timer(timer);
-    player P(6);
+    playerA P(9);
+    playerB Q(9);
+    srand(time(NULL));
+    Q.alter_map();
     P.alter_map();
-    P.draw_items();
+
+    auto acv_1 = Q.draw_items();
     auto acv = P.draw_items();
 
 
@@ -83,6 +89,8 @@ void application::run() {
                 m->move(event.mouse);
                 break;
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+
+
                 for (auto const e: v.getVista()) {
                     if (e->is_on_bound()) {
                         e->click_event();
@@ -91,6 +99,7 @@ void application::run() {
                 break;
 
             case ALLEGRO_EVENT_KEY_DOWN:
+
                 for (auto const e: v.getVista()) {
                     if (e->is_press_key())
                         e->key_event(event.keyboard.keycode);
@@ -124,6 +133,7 @@ void application::run() {
 
             for (auto const e: v.getVista()) {
                 e->draw();
+
             }
             //Dibujar mapa
             /*for(int i=0; i<20; i++){
@@ -133,14 +143,18 @@ void application::run() {
                     }
                 }
             }*/
-
-            for (auto const i: acv) {
-                i->draw();
+            for (auto t: acv) {
+                t->draw();
             }
+            for (auto q: acv_1) {
+                q->draw();
+            }
+
 
             P.draw();
             P.move();
-
+            Q.draw();
+            Q.move();
 
             al_flip_display();
             redraw = false;
