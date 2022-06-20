@@ -71,7 +71,7 @@ void application::run() {
     al_start_timer(timer);
     playerA P( 9);
     playerB Q( 9);
-
+    srand (time(NULL));
     Q.alter_map();
     P.alter_map();
 
@@ -152,13 +152,14 @@ void application::run() {
                     }
                 }
             }*/
-
             for(auto t:acv){
                 t->draw();
             }
             for(auto q:acv_1){
                 q->draw();
             }
+
+
 
 
 

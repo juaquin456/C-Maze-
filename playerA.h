@@ -21,7 +21,7 @@ public:
         al_draw_filled_rectangle(x, y, x + 10, y + 10, a);
     }
     void alter_map() override{
-        srand (time(NULL));
+
         int c=0;
         int p =2;
         while(c<cantidad_items){
@@ -56,13 +56,13 @@ public:
 
     void move()override {
         k->update();
-        if (k->is_key_down(ALLEGRO_KEY_UP))
+        if (k->is_key_down(ALLEGRO_KEY_W))
             y -= 2;
-        if (k->is_key_down(ALLEGRO_KEY_DOWN))
+        if (k->is_key_down(ALLEGRO_KEY_S))
             y += 2;
-        if (k->is_key_down(ALLEGRO_KEY_LEFT))
+        if (k->is_key_down(ALLEGRO_KEY_A))
             x -= 2;
-        if (k->is_key_down(ALLEGRO_KEY_RIGHT))
+        if (k->is_key_down(ALLEGRO_KEY_D))
             x += 2;
 
     }

@@ -23,7 +23,7 @@ public:
         al_draw_filled_rectangle(x, y, x + 10, y + 10, a);
     }
     void alter_map() override{
-        srand (time(NULL));
+
         int c=0;
         int p =2;
         while(c<cantidad_items){
