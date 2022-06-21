@@ -4,11 +4,11 @@
 
 #ifndef PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H
 #define PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H
-
 #include <iostream>
 #include "player.h"
 
-class playerA : player {
+class playerA: player{
+    Keyboard * k = Keyboard::get_instance();
     vector<shared_ptr<item>> *items = nullptr;
     int x = 100;
     int y = 100;
@@ -16,39 +16,37 @@ class playerA : player {
 
 
 public:
-    playerA(int c) : player(c) {};
+    playerA(int c) : player(c){};
 
     void draw() override {
         al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
     }
+    void alter_map() override{
 
-    void alter_map() override {
-
-        int c = 0;
-        int p = 2;
-        while (c < cantidad_items) {
+        int c=0;
+        int p =2;
+        while(c<cantidad_items){
             int i = ale_x();
 
-            if (mapa[p][i] != 'x' && mapa[p][i] != 'O') {
-                mapa[p][i] = '#';
+            if(mapa[p][i]!='x'&&mapa[p][i]!='O'){
+                mapa[p][i]='#';
                 c++;
-                p += 2;
+                p+=2;
             }
         }
 
 
     }
+    list<std::shared_ptr<item>> draw_items() override{
+       list<std::shared_ptr<item>> temp;
 
-    vector<std::shared_ptr<item>> draw_items() override {
-        vector<std::shared_ptr<item>> temp;
 
-
-        for (int i = 0; i < 20; i++) {
+        for(int i=0; i<20; i++) {
             for (int j = 0; j < 32; j++) {
                 if (mapa[i][j] == '#') {
 
 
-                    temp.push_back(make_shared<item>(j * 20 + 8, i * 20 + 8, a));
+                    temp.push_back(make_shared<item>(j*20 +8, i*20 +8,a));
 
 
                 }
@@ -57,7 +55,7 @@ public:
         return temp;
     }
 
-    void move() override {
+    void move()override {
         k->update();
         if (k->is_key_down(ALLEGRO_KEY_W)) {
             if (mapa[(y - 7) / 20][x / 20] != 'x')
@@ -77,9 +75,22 @@ public:
         }
 
     }
+    void verificar(list<std::shared_ptr<item>> &cnt) override{
+        cout<<mapa[x/20][y/20];
+
+        if((mapa[(y/20)][(x/20)]) =='#'){
+
+            mapa[(y/20)][(x/20)] = ' ';
+        }
+    }
+    int get_x(){return x;}
+    int get_y(){return y;}
+
+
 
 
 };
+
 
 
 #endif //PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H

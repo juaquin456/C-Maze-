@@ -9,18 +9,20 @@
 #include <memory>
 #include <stdlib.h>
 #include <time.h>
+#include <list>
 #include "item.h"
 #include "Keyboard.h"
 
 using namespace std;
 
 int ale_x();
-int ale_y();
+
 
 class player {
+
 protected:
 
-    Keyboard *k = Keyboard::get_instance();
+
     int cantidad_items = 0;
 
     char mapa[20][32] = {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -51,9 +53,11 @@ public:
 
     virtual void alter_map() = 0;
 
-    virtual vector<std::shared_ptr<item>> draw_items() = 0;
+    virtual list<std::shared_ptr<item>> draw_items() = 0;
 
     virtual void move()=0;
+    virtual void verificar(list<std::shared_ptr<item>> &cnt)=0;
+
 };
 
 

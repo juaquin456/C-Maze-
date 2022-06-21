@@ -68,12 +68,15 @@ void application::run() {
     Keyboard *k = Keyboard::get_instance();
     Mouse *m = Mouse::getInstance();
     al_start_timer(timer);
-
     playerA P(9);
     playerB Q(9);
     srand(time(NULL));
     Q.alter_map();
     P.alter_map();
+
+    auto acv_1 = Q.draw_items();
+    auto acv = P.draw_items();
+
 
     while (1) {
         al_wait_for_event(queue, &event);
@@ -118,29 +121,93 @@ void application::run() {
         if (redraw && al_is_event_queue_empty(queue)) {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
+            /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
+
+            al_draw_filled_rectangle(250, 40, 390, 60, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 50,0, "OPCION 2");
+
+            al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
+            al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
+*/
+
             for (auto const e: v.getVista()) {
                 e->draw();
 
             }
-            // EN JUEGO
-            if(v.get_vista()==3){
-
-                auto acv_1 = Q.draw_items();
-                auto acv = P.draw_items();
-
-                for (auto t: acv) {
-                    t->draw();
+            //Dibujar mapa
+            /*for(int i=0; i<20; i++){
+                for(int j=0; j<20; j++){
+                    if(mapa[i][j]=='x'){
+                        al_draw_filled_rectangle(i*35,j*35, (i+1)*35-5, (j+1)*35-5, al_map_rgb(0,255,255));
+                    }
                 }
-                for (auto q: acv_1) {
-                    q->draw();
+            }*/
+            int verificar1=0;
+            for (auto iter = begin(acv);iter!=end(acv);iter++) {
+                if(verificar1==1){
+                    auto temp = prev(iter);
+                    acv.remove(*temp);
+                    verificar1 = 0;
+                }
+//                if(verificar1==2){
+//                    acv.pop_back();
+//                }
+
+                if(((*iter)->get_x()==P.get_x())&&((*iter)->get_y()==P.get_y())){
+//                    if(size(acv)==1){
+//                        verificar1 = 2;
+//                    }
+
+                        verificar1=1;
+
+
+                }
+                else{
+                    if(size(acv)==1){
+//                        verificar1 = 2;
+                  }
+                    else{
+                        (*iter)->draw();
+                    }
+
                 }
 
 
-                P.draw();
-                P.move();
-                Q.draw();
-                Q.move();
             }
+            int verificar2=0;
+            for (auto iter = begin(acv_1);iter!=end(acv_1);iter++) {
+                if(verificar2==1){
+                    auto temp = prev(iter);
+                    acv_1.remove(*temp);
+                    verificar2 = 0;
+                }
+                if(verificar2==2){
+                    acv_1.clear();
+                }
+
+                if((*iter)->get_x()==Q.get_x()){
+                    if(size(acv_1)==1){
+                        verificar2 = 2;
+                    }
+                    else{
+                        verificar2=1;
+                    }
+
+                }
+                else{
+                    (*iter)->draw();
+                }
+
+
+            }
+
+
+
+            P.draw();
+            P.move();
+            Q.draw();
+            Q.move();
 
             al_flip_display();
             redraw = false;
