@@ -182,21 +182,26 @@ void application::run() {
                     acv_1.remove(*temp);
                     verificar2 = 0;
                 }
-                if(verificar2==2){
-                    acv_1.clear();
-                }
+//                if(verificar2==2){
+//                    acv_1.clear();
+//                }
 
-                if((*iter)->get_x()==Q.get_x()&&((*iter)->get_y()==Q.get_y())){
-                    if(size(acv_1)==1){
-                        verificar2 = 2;
-                    }
-                    else{
-                        verificar2=1;
-                    }
+                if(((*iter)->get_x()==Q.get_x())&&((*iter)->get_y()==Q.get_y())){
+//                    if(size(acv)==1){
+//                        verificar1 = 2;
+//                    }
+
+                    verificar2=1;
+
 
                 }
                 else{
-                    (*iter)->draw();
+                    if(size(acv_1)==1){
+//                        verificar1 = 2;
+                    }
+                    else{
+                        (*iter)->draw();
+                    }
                 }
 
 
