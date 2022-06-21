@@ -33,16 +33,16 @@ protected:
                          "x x xxxx xxxx xxxxx            ",
                          "xxxxxx          xxx            ",
                          "xx       xxx  xxx x            ",
-                         "xx  xxxxxxxx   x xx           ",
-                         "xxx    xxxxxxxxx xx           ",
-                         "xx  xxxx          x           ",
-                         "xx  x    xxxxxxxxxx           ",
-                         "x       xxxxxxxxxxx           ",
-                         "xx   xxx          x           ",
-                         "xx         xxxxxxxx           ",
-                         "xxx xxxxxx   xxxxxx           ",
-                         "x x xxxxxxxx   xxxx           ",
-                         "xxxxxxxxxxxxxxxxxxx xxxxxxxx  "};
+                         "xx  xxxxxxxx   x xx            ",
+                         "xxx    xxxxxxxxx xx            ",
+                         "xx  xxxx          x            ",
+                         "xx  x    xxxxxxxxxx            ",
+                         "x       xxxxxxxxxxx            ",
+                         "xx   xxx          x            ",
+                         "xx         xxxxxxxx            ",
+                         "xxx xxxxxx   xxxxxx            ",
+                         "x x xxxxxxxx   xxxx            ",
+                         "xxxxxxxxxxxxxxxxxxx xxxxxxxx   "};
 
 public:
     player(int c) : cantidad_items(c) {};

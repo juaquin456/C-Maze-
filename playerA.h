@@ -10,8 +10,8 @@
 
 class playerA : player {
     vector<shared_ptr<item>> *items = nullptr;
-    float x = 100;
-    float y = 100;
+    int x = 100;
+    int y = 100;
     ALLEGRO_COLOR a = al_map_rgb_f(255, 0, 0);
 
 
@@ -19,7 +19,7 @@ public:
     playerA(int c) : player(c) {};
 
     void draw() override {
-        al_draw_filled_rectangle(x, y, x + 10, y + 10, a);
+        al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
     }
 
     void alter_map() override {
@@ -59,14 +59,22 @@ public:
 
     void move() override {
         k->update();
-        if (k->is_key_down(ALLEGRO_KEY_W))
-            y -= 2;
-        if (k->is_key_down(ALLEGRO_KEY_S))
-            y += 2;
-        if (k->is_key_down(ALLEGRO_KEY_A))
-            x -= 2;
-        if (k->is_key_down(ALLEGRO_KEY_D))
-            x += 2;
+        if (k->is_key_down(ALLEGRO_KEY_W)) {
+            if (mapa[(y - 7) / 20][x / 20] != 'x')
+                y -= 2;
+        }
+        if (k->is_key_down(ALLEGRO_KEY_S)) {
+            if (mapa[(y + 7) / 20][x / 20] != 'x')
+                y += 2;
+        }
+        if (k->is_key_down(ALLEGRO_KEY_A)) {
+            if (mapa[(y) / 20][(x-7) / 20] != 'x')
+                x -= 2;
+        }
+        if (k->is_key_down(ALLEGRO_KEY_D)) {
+            if (mapa[(y) / 20][(x+7) / 20] != 'x')
+                x += 2;
+        }
 
     }
 

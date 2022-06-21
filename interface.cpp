@@ -71,21 +71,21 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
                          "x x xxxx xxxx xxxxx            ",
                          "xxxxxx          xxx            ",
                          "xx       xxx  xxx x            ",
-                         "xx  xxxxxxxx   x xx           ",
-                         "xxx    xxxxxxxxx xx           ",
-                         "xx  xxxx          x           ",
-                         "xx  x    xxxxxxxxxx           ",
-                         "x       xxxxxxxxxxx           ",
-                         "xx   xxx          x           ",
-                         "xx         xxxxxxxx           ",
-                         "xxx xxxxxx   xxxxxx           ",
-                         "x x xxxxxxxx   xxxx           ",
-                         "xxxxxxxxxxxxxxxxxxx xxxxxxxx  "};
+                         "xx  xxxxxxxx   x xx            ",
+                         "xxx    xxxxxxxxx xx            ",
+                         "xx  xxxx          x            ",
+                         "xx  x    xxxxxxxxxx            ",
+                         "x       xxxxxxxxxxx            ",
+                         "xx   xxx          x            ",
+                         "xx         xxxxxxxx            ",
+                         "xxx xxxxxx   xxxxxx            ",
+                         "x x xxxxxxxx   xxxx            ",
+                         "xxxxxxxxxxxxxxxxxxx xxxxxxxx   "};
 
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 32; j++) {
             if (mapa[i][j] == 'x') {
-                temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20 - 3));
+                temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20-3));
             }
         }
     }
