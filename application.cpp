@@ -186,7 +186,7 @@ void application::run() {
                     acv_1.clear();
                 }
 
-                if((*iter)->get_x()==Q.get_x()){
+                if((*iter)->get_x()==Q.get_x()&&((*iter)->get_y()==Q.get_y())){
                     if(size(acv_1)==1){
                         verificar2 = 2;
                     }
