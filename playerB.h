@@ -16,7 +16,6 @@ class playerB: player{
     int x = 600;
     int y = 600;
     ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 0);
-
 public:
     playerB(int c) : player(c){};
 

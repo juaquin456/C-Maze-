@@ -16,10 +16,11 @@
 #include "item.h"
 #include "player.h"
 #include "playerA.h"
+#include "bot.h"
 #include "playerB.h"
 
 
-void must_init(bool test, const char *description) {
+void must_init(bool test, const char* description) {
     if (test) return;
 
     printf("couldn't initialize %s\n", description);
@@ -37,21 +38,21 @@ void application::run() {
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
 
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
+    ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     must_init(timer, "timer");
 
-    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
+    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
     must_init(queue, "queue");
 
     al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    auto &disp = Display<ALLEGRO_DISPLAY *>::getInstance(al_create_display(H, V))->get();
+    auto& disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(H, V))->get();
     //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
     must_init(*disp, "display");
 
-    ALLEGRO_FONT *font = al_create_builtin_font();
+    ALLEGRO_FONT* font = al_create_builtin_font();
     must_init(font, "font");
 
     must_init(al_init_primitives_addon(), "primitives");
@@ -65,11 +66,11 @@ void application::run() {
     bool redraw = true;
     ALLEGRO_EVENT event;
 
-    Keyboard *k = Keyboard::get_instance();
-    Mouse *m = Mouse::getInstance();
+    Keyboard* k = Keyboard::get_instance();
+    Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
     playerA P(9);
-    playerB Q(9);
+    bot Q(9);
     srand(time(NULL));
     Q.alter_map();
     P.alter_map();
@@ -91,7 +92,7 @@ void application::run() {
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 
 
-                for (auto const e: v.getVista()) {
+                for (auto const e : v.getVista()) {
                     if (e->is_on_bound()) {
                         e->click_event();
                     }
@@ -100,7 +101,7 @@ void application::run() {
 
             case ALLEGRO_EVENT_KEY_DOWN:
 
-                for (auto const e: v.getVista()) {
+                for (auto const e : v.getVista()) {
                     if (e->is_press_key())
                         e->key_event(event.keyboard.keycode);
                 }
@@ -123,15 +124,13 @@ void application::run() {
 
             /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
-
             al_draw_filled_rectangle(250, 40, 390, 60, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 50,0, "OPCION 2");
-
             al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
             al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
 */
 
-            for (auto const e: v.getVista()) {
+            for (auto const e : v.getVista()) {
                 e->draw();
 
             }
@@ -143,31 +142,34 @@ void application::run() {
                     }
                 }
             }*/
-            int verificar1=0;
-            for (auto iter = begin(acv);iter!=end(acv);iter++) {
-                if(verificar1==1){
+            int verificar1 = 0;
+            auto itr_fin = acv.end();
+            itr_fin--;
+            for (auto iter = begin(acv); iter != end(acv); iter++) {
+
+                if (verificar1 == 1) {
                     auto temp = prev(iter);
                     acv.remove(*temp);
                     verificar1 = 0;
                 }
-//                if(verificar1==2){
-//                    acv.pop_back();
-//                }
+                //                if(verificar1==2){
+                //                    acv.pop_back();
+                //                }
 
-                if(((*iter)->get_x()==P.get_x())&&((*iter)->get_y()==P.get_y())){
-//                    if(size(acv)==1){
-//                        verificar1 = 2;
-//                    }
+                if (((*iter)->get_x() == P.get_x()) && ((*iter)->get_y() == P.get_y())) {
+                    //                    if(size(acv)==1){
+                    //                        verificar1 = 2;
+                    //                    }
 
-                        verificar1=1;
+                    verificar1 = 1;
 
 
                 }
-                else{
-                    if(size(acv)==1){
-//                        verificar1 = 2;
-                  }
-                    else{
+                else {
+                    if (size(acv) == 1) {
+                        //                        verificar1 = 2;
+                    }
+                    else {
                         (*iter)->draw();
                     }
 
@@ -175,31 +177,31 @@ void application::run() {
 
 
             }
-            int verificar2=0;
-            for (auto iter = begin(acv_1);iter!=end(acv_1);iter++) {
-                if(verificar2==1){
+            int verificar2 = 0;
+            for (auto iter = begin(acv_1); iter != end(acv_1); iter++) {
+                if (verificar2 == 1) {
                     auto temp = prev(iter);
                     acv_1.remove(*temp);
                     verificar2 = 0;
                 }
-//                if(verificar2==2){
-//                    acv_1.clear();
-//                }
+                //                if(verificar2==2){
+                //                    acv_1.clear();
+                //                }
 
-                if(((*iter)->get_x()==Q.get_x())&&((*iter)->get_y()==Q.get_y())){
-//                    if(size(acv)==1){
-//                        verificar1 = 2;
-//                    }
+                if (((*iter)->get_x() == Q.get_x()) && ((*iter)->get_y() == Q.get_y())) {
+                    //                    if(size(acv)==1){
+                    //                        verificar1 = 2;
+                    //                    }
 
-                    verificar2=1;
+                    verificar2 = 1;
 
 
                 }
-                else{
-                    if(size(acv_1)==1){
-//                        verificar1 = 2;
+                else {
+                    if (size(acv_1) == 1) {
+                        //                        verificar1 = 2;
                     }
-                    else{
+                    else {
                         (*iter)->draw();
                     }
                 }
