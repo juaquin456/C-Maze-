@@ -36,7 +36,7 @@ vector<std::shared_ptr<components>> interface::getVista() {
     return *data;
 }
 
-int interface::get_vista() const {
+int interface::currentView() const {
     return current_v;
 }
 
@@ -137,6 +137,8 @@ vector<std::shared_ptr<components>> interface::create_rank() {
             i++;
         }
     }
+    function<void()> fn = [this]() { this->render_vista(2); };
+    temp.push_back(make_shared<button>("Retroceder", 840, 600, 1000, 650, fn));
 
     return temp;
 }

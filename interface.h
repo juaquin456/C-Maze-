@@ -42,7 +42,7 @@ public:
 
     vector<std::shared_ptr<components>> getVista();
 
-    int get_vista() const;
+    int currentView() const;
 
 };
 
