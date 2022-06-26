@@ -42,7 +42,17 @@ int interface::get_vista() const {
 
 vector<std::shared_ptr<components>> interface::create_input() {
     vector<std::shared_ptr<components>> temp;
-    function<void()> f = [this]() { this->render_vista(2); };
+    function<void(string)> f = [this](const string& text) {
+        fstream f;
+        f.open("../rank", std::ios_base::app);
+        if (!f.is_open()) {
+            cout << "failed to open " << "rank" << '\n';
+        } else {
+            f << text << " " << 0 << endl;
+            cout << "write successs" << endl;
+        }
+        this->render_vista(2);
+    };
     temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, f));
     return temp;
 }

@@ -125,7 +125,6 @@ void application::run() {
 
             for (auto const e : v.getVista()) {
                 e->draw();
-
             }
 
             int verificar1 = 0;
@@ -199,6 +198,7 @@ void application::run() {
             P.move();
             Q.draw();
             Q.move();
+
 
             al_flip_display();
             redraw = false;

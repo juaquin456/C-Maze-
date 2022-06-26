@@ -14,10 +14,10 @@
 
 class textbox : public components {
     std::string text;
-    std::function<void()> f;
+    std::function<void(std::string)> f;
     ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 255);
 public:
-    textbox(const char *t, float xi, float yi, float xf, float yf, std::function<void()> &f) : text(t),
+    textbox(const char *t, float xi, float yi, float xf, float yf, std::function<void(std::string)> &f) : text(t),
                                                                                                components(xi, yi, xf,
                                                                                                           yf), f(f) {};
 
