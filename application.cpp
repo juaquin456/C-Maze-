@@ -122,26 +122,12 @@ void application::run() {
         if (redraw && al_is_event_queue_empty(queue)) {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            /*al_draw_filled_rectangle(250, 10, 390, 30, al_map_rgb(255, 0, 0));
-            al_draw_text(font, al_map_rgb(0,0,0), 300, 20,0, "OPCION 1");
-            al_draw_filled_rectangle(250, 40, 390, 60, al_map_rgb(255, 0, 0));
-            al_draw_text(font, al_map_rgb(0,0,0), 300, 50,0, "OPCION 2");
-            al_draw_filled_rectangle(250, 70, 390, 90, al_map_rgb(255, 0, 0));
-            al_draw_text(font, al_map_rgb(0,0,0), 300, 80,0, "OPCION 3");
-*/
 
             for (auto const e : v.getVista()) {
                 e->draw();
 
             }
-            //Dibujar mapa
-            /*for(int i=0; i<20; i++){
-                for(int j=0; j<20; j++){
-                    if(mapa[i][j]=='x'){
-                        al_draw_filled_rectangle(i*35,j*35, (i+1)*35-5, (j+1)*35-5, al_map_rgb(0,255,255));
-                    }
-                }
-            }*/
+
             int verificar1 = 0;
             auto itr_fin = acv.end();
             itr_fin--;
@@ -208,8 +194,6 @@ void application::run() {
 
 
             }
-
-
 
             P.draw();
             P.move();
