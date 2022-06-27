@@ -105,8 +105,8 @@ vector<pair<int, int>> getPath(pair<int, int> begin, char mapa[][N], int n, int 
     for (int i = 0; i < cont; i++)
         ids[cities[i]] = i;
     // tsp
-    vector<vector<int>> state(n, vector<int>((long long) 1 << n, INF));
-    vector<vector<int>> parent(n, vector<int>((long long) 1 << n, 0));
+    vector<vector<int>> state(cont, vector<int>((long long) 1 << cont, INF));
+    vector<vector<int>> parent(cont, vector<int>((long long) 1 << cont, 0));
 
     int ans = tsp(begin, 0, 1, state, parent, cont, cities);
     // find path tsp

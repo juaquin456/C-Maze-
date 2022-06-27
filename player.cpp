@@ -3,6 +3,7 @@
 //
 
 #include "player.h"
+#include <allegro5/allegro_font.h>
 
 int player::ale_x() {
     int iSecret;

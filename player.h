@@ -11,7 +11,6 @@
 #include <time.h>
 #include <list>
 #include "item.h"
-#include "score.h"
 #include "Keyboard.h"
 #include <unordered_map>
 using namespace std;
