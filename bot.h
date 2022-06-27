@@ -18,7 +18,7 @@ public:
     void alter_map() override {
         player::alter_map();
 
-        route = getPath({ 1,1 }, mapa, 20, 32);
+        route = getPath({ 1,1 }, mapa, 33, 54);
         sz = (int)route.size();
     }
 
@@ -47,29 +47,10 @@ public:
             pasos++;
 
         }
-        if (itr + 1 > sz) {
-            k->update();
-            if (k->is_key_down(ALLEGRO_KEY_UP)) {
-                if (mapa[(y - 7) / 20][x / 20] != 'x')
-                    y -= 2;
-            }
-            if (k->is_key_down(ALLEGRO_KEY_DOWN)) {
-                if (mapa[(y + 7) / 20][x / 20] != 'x')
-                    y += 2;
-            }
-            if (k->is_key_down(ALLEGRO_KEY_LEFT)) {
-                if (mapa[(y) / 20][(x - 7) / 20] != 'x')
-                    x -= 2;
-            }
-            if (k->is_key_down(ALLEGRO_KEY_RIGHT)) {
-                if (mapa[(y) / 20][(x + 7) / 20] != 'x')
-                    x += 2;
-            }
-        }
         if((mapa[(y/20)][(x/20)]) =='#'){
             cout << y << "\t" << x << endl;
             mapa[(y/20)][(x/20)] = ' ';
-            items.erase((int)(y/20)*32 + (int)x/20);
+            items.erase((int)(y/20)*54 + (int)x/20);
             puntos++;
         }
     }

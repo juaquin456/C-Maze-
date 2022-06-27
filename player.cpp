@@ -30,7 +30,7 @@ void player::alter_map() {
 
         if(mapa[p][i]!='x'&&mapa[p][i]!='O'){
             mapa[p][i]='#';
-            items.insert({p*32+i, item(i*20+8, p*20+8, a)});
+            items.insert({p*54+i, item(i*20+8, p*20+8, a)});
             c++;
             p+=2;
         }
