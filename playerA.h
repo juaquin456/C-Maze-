@@ -7,52 +7,13 @@
 #include <iostream>
 #include "player.h"
 
-class playerA: player{
-    Keyboard * k = Keyboard::get_instance();
-    vector<shared_ptr<item>> *items = nullptr;
-    int x = 100;
-    int y = 100;
-    ALLEGRO_COLOR a = al_map_rgb_f(255, 0, 0);
-
+class playerA: public player{
 
 public:
-    playerA(int c) : player(c){};
+    using player::player;
 
-    void draw() override {
-        al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
-    }
     void alter_map() override{
-
-        int c=0;
-        int p =2;
-        while(c<cantidad_items){
-            int i = ale_x();
-
-            if(mapa[p][i]!='x'&&mapa[p][i]!='O'){
-                mapa[p][i]='#';
-                c++;
-                p+=2;
-            }
-        }
-
-
-    }
-    list<std::shared_ptr<item>> draw_items() override{
-       list<std::shared_ptr<item>> temp;
-
-
-        for(int i=0; i<20; i++) {
-            for (int j = 0; j < 32; j++) {
-                if (mapa[i][j] == '#') {
-
-
-                    temp.push_back(make_shared<item>(j*20 +8, i*20 +8,a));
-
-
-                }
-            }
-        }
-        return temp;
+        player::alter_map();
     }
 
     void move()override {
@@ -73,21 +34,12 @@ public:
             if (mapa[(y) / 20][(x+7) / 20] != 'x')
                 x += 2;
         }
-
-    }
-    void verificar(list<std::shared_ptr<item>> &cnt) override{
-        cout<<mapa[x/20][y/20];
-
         if((mapa[(y/20)][(x/20)]) =='#'){
-
+            cout << y << "\t" << x << endl;
             mapa[(y/20)][(x/20)] = ' ';
+            items.erase((int)(y/20)*32 + (int)x/20);
         }
     }
-    int get_x(){return x;}
-    int get_y(){return y;}
-
-
-
 
 };
 

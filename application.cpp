@@ -69,14 +69,11 @@ void application::run() {
     Keyboard* k = Keyboard::get_instance();
     Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
-    playerA P(9);
-    bot Q(9);
+    playerA P(9, 100, 100, al_map_rgb(255, 0, 0));
+    bot Q(9, 48, 28, al_map_rgb(255, 255, 0));
     srand(time(NULL));
     Q.alter_map();
     P.alter_map();
-
-    auto acv_1 = Q.draw_items();
-    auto acv = P.draw_items();
 
 
     while (1) {
@@ -126,79 +123,12 @@ void application::run() {
             for (auto const e : v.getVista()) {
                 e->draw();
             }
-
-            int verificar1 = 0;
-            auto itr_fin = acv.end();
-            itr_fin--;
-            for (auto iter = begin(acv); iter != end(acv); iter++) {
-
-                if (verificar1 == 1) {
-                    auto temp = prev(iter);
-                    acv.remove(*temp);
-                    verificar1 = 0;
-                }
-                //                if(verificar1==2){
-                //                    acv.pop_back();
-                //                }
-
-                if (((*iter)->get_x() == P.get_x()) && ((*iter)->get_y() == P.get_y())) {
-                    //                    if(size(acv)==1){
-                    //                        verificar1 = 2;
-                    //                    }
-
-                    verificar1 = 1;
-
-
-                }
-                else {
-                    if (size(acv) == 1) {
-                        //                        verificar1 = 2;
-                    }
-                    else {
-                        (*iter)->draw();
-                    }
-
-                }
-
-
+            if (v.currentView() == 3) {
+                P.draw();
+                P.move();
+                Q.draw();
+                Q.move();
             }
-            int verificar2 = 0;
-            for (auto iter = begin(acv_1); iter != end(acv_1); iter++) {
-                if (verificar2 == 1) {
-                    auto temp = prev(iter);
-                    acv_1.remove(*temp);
-                    verificar2 = 0;
-                }
-                //                if(verificar2==2){
-                //                    acv_1.clear();
-                //                }
-
-                if (((*iter)->get_x() == Q.get_x()) && ((*iter)->get_y() == Q.get_y())) {
-                    //                    if(size(acv)==1){
-                    //                        verificar1 = 2;
-                    //                    }
-
-                    verificar2 = 1;
-
-
-                }
-                else {
-                    if (size(acv_1) == 1) {
-                        //                        verificar1 = 2;
-                    }
-                    else {
-                        (*iter)->draw();
-                    }
-                }
-
-
-            }
-
-            P.draw();
-            P.move();
-            Q.draw();
-            Q.move();
-
 
             al_flip_display();
             redraw = false;

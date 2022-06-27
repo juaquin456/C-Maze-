@@ -18,7 +18,7 @@ class item {
 public:
     item(int x,int y,ALLEGRO_COLOR color):x1(x),y1(y),a(color){};
     void draw() {
-        al_draw_filled_circle(x1,y1,4,a);
+        al_draw_filled_circle(x1,y1,5,a);
     }
     int get_x(){return x1;}
     int get_y(){return y1;}

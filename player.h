@@ -12,7 +12,7 @@
 #include <list>
 #include "item.h"
 #include "Keyboard.h"
-
+#include <unordered_map>
 using namespace std;
 
 int ale_x();
@@ -21,10 +21,12 @@ int ale_x();
 class player {
 
 protected:
-
-
+    int x = 100;
+    int y = 100;
+    unordered_map<int, item> items;
     int cantidad_items = 0;
-
+    Keyboard * k = Keyboard::get_instance();
+    ALLEGRO_COLOR a = al_map_rgb_f(255, 0, 0);
     char mapa[20][32] = {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                          "x                             x",
                          "x                             x",
@@ -47,17 +49,31 @@ protected:
                          "xxxxxxxxxxxxxxxxxxx xxxxxxxx   "};
 
 public:
-    player(int c) : cantidad_items(c) {};
+    player(int c, int x, int y, ALLEGRO_COLOR color) : cantidad_items(c), x(x), y(y), a(color) {};
 
-    virtual void draw() = 0;
+    void draw(){
+        al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
+        for(auto [k, v]:items){
+            v.draw();
+        }
+    };
 
-    virtual void alter_map() = 0;
+    virtual void alter_map(){
+        int c=0;
+        int p =2;
+        while(c < cantidad_items){
+            int i = ale_x();
 
-    virtual list<std::shared_ptr<item>> draw_items() = 0;
+            if(mapa[p][i]!='x'&&mapa[p][i]!='O'){
+                mapa[p][i]='#';
+                items.insert({p*32+i, item(i*20+8, p*20+8, a)});
+                c++;
+                p+=2;
+            }
+        }
 
-    virtual void move()=0;
-    virtual void verificar(list<std::shared_ptr<item>> &cnt)=0;
-
+    };
+    virtual void move() = 0;
 };
 
 

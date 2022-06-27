@@ -4,12 +4,7 @@
 #include "tsp.h"
 using namespace std;
 
-class bot : player {
-    vector<shared_ptr<item>>* items = nullptr;
-    Keyboard* k = Keyboard::get_instance();
-    int x = 48;//60;
-    int y = 28;//40;
-    ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 0);
+class bot : public player {
     vector<pair<int, int>> route = { {0,0} };
     int cambio_x = 0;
     int cambio_y = 0;
@@ -17,44 +12,14 @@ class bot : player {
     int itr = 0;
     int pasos = 0;
 
-
-
 public:
-    bot(int c) : player(c) {};
+    using player::player;
 
-    void draw() override {
-        al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
-    }
     void alter_map() override {
-
-        int c = 0;
-        int p = 2;
-
-        while (c < cantidad_items) {
-            int i = ale_x();
-
-            if (mapa[p][i] != 'x' && mapa[p][i] != 'O') {
-                mapa[p][i] = '#';
-                c++;
-                p += 2;
-            }
-        }
+        player::alter_map();
 
         route = getPath({ 1,1 }, mapa, 20, 32);
         sz = (int)route.size();
-    }
-    list<std::shared_ptr<item>> draw_items() override {
-        list<std::shared_ptr<item>> temp;
-
-
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 32; j++) {
-                if (mapa[i][j] == '#') {
-                    temp.push_back(make_shared<item>(j * 20 + 8, i * 20 + 8, a));
-                }
-            }
-        }
-        return temp;
     }
 
     void move()override {
@@ -101,14 +66,10 @@ public:
                     x += 2;
             }
         }
-
+        if((mapa[(y/20)][(x/20)]) =='#'){
+            cout << y << "\t" << x << endl;
+            mapa[(y/20)][(x/20)] = ' ';
+            items.erase((int)(y/20)*32 + (int)x/20);
+        }
     }
-    void verificar(list<std::shared_ptr<item>>& cnt) override {
-
-
-    }
-    int get_x() { return x; }
-    int get_y() { return y; }
-
-
 };
