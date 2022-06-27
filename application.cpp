@@ -13,8 +13,6 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Display.h"
-#include "item.h"
-#include "player.h"
 #include "playerA.h"
 #include "bot.h"
 #include "playerB.h"
@@ -69,8 +67,8 @@ void application::run() {
     Keyboard* k = Keyboard::get_instance();
     Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
-    playerA P(9, 100, 100, al_map_rgb(255, 0, 0));
-    bot Q(9, 48, 28, al_map_rgb(255, 255, 0));
+    playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
+    bot Q(9, 48, 28, al_map_rgb(255, 255, 0), 700, 600);
     srand(time(NULL));
     Q.alter_map();
     P.alter_map();

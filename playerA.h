@@ -38,6 +38,7 @@ public:
             cout << y << "\t" << x << endl;
             mapa[(y/20)][(x/20)] = ' ';
             items.erase((int)(y/20)*32 + (int)x/20);
+            puntos++;
         }
     }
 

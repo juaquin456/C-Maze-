@@ -11,18 +11,19 @@
 #include <time.h>
 #include <list>
 #include "item.h"
+#include "score.h"
 #include "Keyboard.h"
 #include <unordered_map>
 using namespace std;
 
-int ale_x();
-
-
 class player {
-
+    int ale_x();
 protected:
     int x = 100;
     int y = 100;
+    int x_score = 100;
+    int y_score = 100;
+    int puntos = 0;
     unordered_map<int, item> items;
     int cantidad_items = 0;
     Keyboard * k = Keyboard::get_instance();
@@ -49,30 +50,9 @@ protected:
                          "xxxxxxxxxxxxxxxxxxx xxxxxxxx   "};
 
 public:
-    player(int c, int x, int y, ALLEGRO_COLOR color) : cantidad_items(c), x(x), y(y), a(color) {};
-
-    void draw(){
-        al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
-        for(auto [k, v]:items){
-            v.draw();
-        }
-    };
-
-    virtual void alter_map(){
-        int c=0;
-        int p =2;
-        while(c < cantidad_items){
-            int i = ale_x();
-
-            if(mapa[p][i]!='x'&&mapa[p][i]!='O'){
-                mapa[p][i]='#';
-                items.insert({p*32+i, item(i*20+8, p*20+8, a)});
-                c++;
-                p+=2;
-            }
-        }
-
-    };
+    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys);
+    void draw();
+    virtual void alter_map();
     virtual void move() = 0;
 };
 
