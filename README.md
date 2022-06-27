@@ -8,10 +8,8 @@ CMAZE++ es un juego en el que tendrás que demostrar tu habilidad para resolver 
 ## Resumen del Programa:
 > El programa esta disenando con algunos patrones de diseno:
 
-1. Interfaz:
-2. Display:
-3. Player:
-4. Components:
+1. Interfaz: abs factory  componete
+5. Keyboard singleton ,mouse diplay
 
 > Utilizacion de archivos:
 
