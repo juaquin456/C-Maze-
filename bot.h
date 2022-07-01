@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BOT_H
+#define BOT_H
+
 #include<iostream>
 #include "player.h"
 #include "tsp.h"
@@ -13,7 +15,9 @@ class bot : public player {
     int pasos = 0;
 
 public:
-    using player::player;
+    bot(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys): player(c,x,y,color,xs,ys){
+        alter_map();
+    }
 
     void alter_map() override {
         player::alter_map();
@@ -55,3 +59,4 @@ public:
         }
     }
 };
+#endif

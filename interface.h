@@ -13,7 +13,6 @@
 #include "button.h"
 #include "block.h"
 #include "textbox.h"
-#include "player.h"
 #include "label.h"
 
 using namespace std;

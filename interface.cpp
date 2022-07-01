@@ -7,7 +7,7 @@
 #include <map>
 #include <algorithm>
 #include "interface.h"
-#include "player.h"
+#include "bot.h"
 
 
 void interface::render_vista(int n_interface) {
@@ -112,8 +112,6 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
             }
         }
     }
-
-
     return temp;
 }
 

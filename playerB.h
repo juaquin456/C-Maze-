@@ -12,8 +12,9 @@
 
 class playerB: player{
 public:
-    using player::player;
-
+    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys): player(c,x,y,color,xs,ys){
+        alter_map();
+    }
     void alter_map() override{
         player::alter_map();
     }
