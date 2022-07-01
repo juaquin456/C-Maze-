@@ -26,7 +26,8 @@ public:
         sz = (int)route.size();
     }
 
-    void move()override {
+    void move() override {
+        cout << "bot" << endl;
 
         if (itr + 1 < sz) {
 

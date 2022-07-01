@@ -30,7 +30,7 @@ application::application() {
 }
 
 void application::run() {
-
+    srand(time(nullptr));
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
@@ -66,9 +66,8 @@ void application::run() {
     Keyboard* k = Keyboard::get_instance();
     Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
-    srand(time(NULL));
-    playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
-    bot Q(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600);
+    //playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
+    //bot Q(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600);
 
 
     while (1) {
@@ -118,12 +117,12 @@ void application::run() {
             for (auto const e : v.getVista()) {
                 e->draw();
             }
-            if (v.currentView() == 3) {
+            /*if (v.currentView() == 3) {
                 P.draw();
                 P.move();
                 Q.draw();
                 Q.move();
-            }
+            }*/
 
             al_flip_display();
             redraw = false;

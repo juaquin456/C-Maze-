@@ -7,15 +7,14 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <stdlib.h>
-#include <time.h>
 #include <list>
 #include "item.h"
 #include "Keyboard.h"
+#include "components.h"
 #include <unordered_map>
 using namespace std;
 
-class player {
+class player: public components {
     int ale_x();
 protected:
     int x = 100;

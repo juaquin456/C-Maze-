@@ -14,6 +14,9 @@
 #include "block.h"
 #include "textbox.h"
 #include "label.h"
+#include "bot.h"
+#include "playerA.h"
+#include "playerB.h"
 
 using namespace std;
 

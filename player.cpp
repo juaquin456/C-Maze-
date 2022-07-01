@@ -12,7 +12,8 @@ int player::ale_x() {
     return iSecret;
 }
 
-player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys) : cantidad_items(c), x(x), y(y), a(color), x_score(xs), y_score(ys) {}
+player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys) : cantidad_items(c), x(x), y(y), a(color), x_score(xs), y_score(ys),
+                                                                           components(0,0,0,0) {}
 
 void player::draw() {
     al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
@@ -20,6 +21,7 @@ void player::draw() {
         v.draw();
     }
     al_draw_textf(al_create_builtin_font(), al_map_rgb(255,255,255), x_score, y_score, 1, "puntos: %d", puntos);
+    move();
 }
 
 void player::alter_map() {
@@ -32,7 +34,7 @@ void player::alter_map() {
             mapa[p][i]='#';
             items.insert({p*55+i, item(i*20+8, p*20+8, a)});
             c++;
-            p+=3;
+            p+=2;
         }
     }
 

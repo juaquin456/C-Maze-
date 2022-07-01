@@ -19,6 +19,7 @@ public:
     }
 
     void move()override {
+        cout << "a" << endl;
         k->update();
         if (k->is_key_down(ALLEGRO_KEY_W)) {
             if (mapa[(y - 7) / 20][x / 20] != 'x')
