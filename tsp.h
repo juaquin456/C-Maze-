@@ -9,7 +9,7 @@
 #define s second
 
 using namespace std;
-const int N = 54;
+const int N = 55;
 bool vis[N][N];
 int previousStep[N][N][N];
 //arr der aba  izq
@@ -19,7 +19,7 @@ constexpr int INF = 1e9;
 int dist[N][N][N];
 
 void bfs(char A[][N], int index, vector<pair<int, int>> cities) {
-    int n = 33, m = 54, cont = 7;
+    int n = 33, m = 55, cont = 7;
     queue<pair<int, int>> q;
     pair<int, int> begin = cities[index];
     q.push(begin);

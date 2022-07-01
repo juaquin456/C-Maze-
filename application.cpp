@@ -68,7 +68,7 @@ void application::run() {
     Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
     playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
-    bot Q(9, 48, 28, al_map_rgb(255, 255, 0), 700, 600);
+    bot Q(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600);
     srand(time(NULL));
     Q.alter_map();
     P.alter_map();
