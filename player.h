@@ -36,7 +36,7 @@ protected:
     int cantidad_items = 0;
     string name = "Guest420";
 
-    char mapa[33][55];
+    char mapa[33][54];
     //    char mapa[33][55] = {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     //                         "x x     xxx       x        x x    x   xx     xxxxxx xx",
     //                         "x   x x   x xxxxx x xxxxxx   x xxxxxx  xxx x      x  x",

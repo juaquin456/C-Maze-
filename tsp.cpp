@@ -4,7 +4,7 @@
 #include "tsp.h"
 
 constexpr int INF = 1e9;
-constexpr int N = 55;
+constexpr int N = 54;
 int dx[4] = { -1, 0, 1, 0 };
 int dy[4] = { 0, 1, 0, -1 };
 bool vis[N][N];
@@ -13,7 +13,7 @@ int previousStep[N][N][N];
 int dist[N][N][N];
 
 void bfs(char(*A)[N], int index, vector<pair<int, int>> cities) {
-    int n = 33, m = 55, cont = 7;
+    int n = 33, m = 54, cont = 7;
     queue<pair<int, int>> q;
     pair<int, int> begin = cities[index];
     q.push(begin);
@@ -63,7 +63,7 @@ int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>>& state, v
 
 }
 
-void init(char(*mapa)[55], int n, int m, vector<pair<int, int>>& cities) {
+void init(char(*mapa)[54], int n, int m, vector<pair<int, int>>& cities) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             for (int k = 0; k < n; k++)
@@ -85,7 +85,7 @@ void init(char(*mapa)[55], int n, int m, vector<pair<int, int>>& cities) {
 
 }
 
-vector<pair<int, int>> getPath(pair<int, int> begin, char(*mapa)[55], int n, int m) {
+vector<pair<int, int>> getPath(pair<int, int> begin, char(*mapa)[54], int n, int m) {
 
     // init
     vector<pair<int, int>> cities;

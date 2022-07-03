@@ -7,7 +7,7 @@
 int player::ale_x() {
     int iSecret;
 
-    iSecret = rand() % 54 + 1;
+    iSecret = rand() % 53 + 1;
     return iSecret;
 }
 
@@ -18,7 +18,7 @@ components(0, 0, 0, 0) {
     current_tiempo = tiempo;
     if(username != "") name = username;
     for (int i = 0; i < 33; i++) {
-        for (int j = 0; j < 55; j++) {
+        for (int j = 0; j < 54; j++) {
             mapa[i][j] = map[i][j];
         }
     }
@@ -58,10 +58,9 @@ void player::alter_map() {
     int p = 2;
     while (c < cantidad_items) {
         int i = ale_x();
-        i %= 54;
         if (mapa[p][i] != 'x' && mapa[p][i] != 'O' && mapa[p][i] != '#') {
             mapa[p][i] = '#';
-            items.insert({ p * 55 + i, item(i * 20 + 8, p * 20 + 8, a) });
+            items.insert({ p * 54 + i, item(i * 20 + 8, p * 20 + 8, a) });
             c++;
             p += 3;
         }

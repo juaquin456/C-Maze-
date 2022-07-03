@@ -25,7 +25,7 @@ public:
     void alter_map() override {
         player::alter_map();
 
-        route = getPath({ 0, 1 }, mapa, 33, 55);
+        route = getPath({ 0, 1 }, mapa, 33, 54);
         sz = (int)route.size();
     }
 
@@ -57,7 +57,7 @@ public:
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
-            items.erase((int)(y / 20) * 55 + (int)x / 20);
+            items.erase((int)(y / 20) * 54 + (int)x / 20);
             puntos++;
         }
     }

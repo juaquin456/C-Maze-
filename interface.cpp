@@ -98,11 +98,11 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
     vector<std::shared_ptr<components>> temp;
 
     int x = 33;
-    int y = 55;
-    char** mapa = llenar_mapa("mapa.txt", 33, 55);
+    int y = 54;
+    char** mapa = llenar_mapa("../mapa.txt", 33, 54);
 
     for (int i = 0; i < 33; i++) {
-        for (int j = 0; j < 55; j++) {
+        for (int j = 0; j < 54; j++) {
             if (mapa[i][j] == 'x') {
                 temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20 - 3));
             }

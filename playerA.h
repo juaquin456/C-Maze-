@@ -42,7 +42,7 @@ public:
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
-            items.erase((int)(y / 20) * 55 + (int)x / 20);
+            items.erase((int)(y / 20) * 54 + (int)x / 20);
             puntos++;
         }
     }
