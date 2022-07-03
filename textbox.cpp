@@ -19,7 +19,6 @@ void textbox::key_event(int key) {
         text += key + 'a' - 1;
     } else if (key == 67) { //enter
         f(text);
-        std::cout << text << std::endl;
     } else if (key == 63) { //delete
         if (text.length() > 0)
             text.pop_back();

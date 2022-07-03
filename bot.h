@@ -27,7 +27,6 @@ public:
     }
 
     void move() override {
-        cout << "bot" << endl;
 
         if (itr + 1 < sz) {
 

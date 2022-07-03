@@ -18,8 +18,7 @@ public:
         player::alter_map();
     }
 
-    void move()override {
-        cout << "a" << endl;
+    void move() override {
         k->update();
         if (k->is_key_down(ALLEGRO_KEY_W)) {
             if (mapa[(y - 7) / 20][x / 20] != 'x')

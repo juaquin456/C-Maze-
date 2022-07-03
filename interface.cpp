@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include <iterator>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 #include "interface.h"
 
@@ -63,29 +63,25 @@ int interface::currentView() const {
 
 vector<std::shared_ptr<components>> interface::create_input() {
     vector<std::shared_ptr<components>> temp;
-    function<void(string)> f = [this](const string& text) {
-        fstream f;
-        f.open("../rank", std::ios_base::app);
-        if (!f.is_open()) {
-            cout << "failed to open " << "rank" << '\n';
-        } else {
-            f << text << " " << 0 << endl;
-            cout << "write successs" << endl;
-        }
+    function<void(string)> fun_write = [this](const string& text) {
+        this->user = text;
         this->render_vista(2);
     };
-    temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, f));
+    temp.push_back(make_shared<label>("Ingrese su usuario:", 440, 290, 640, 350, al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
+    temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, fun_write));
     return temp;
 }
 
 vector<std::shared_ptr<components>> interface::create_menu() {
     vector<std::shared_ptr<components>> temp;
     function<void()> f1_rank = [this]() { this->render_vista(4); };
-    function<void()> f2_play = [this]() { this->render_vista(3); };
+    function<void()> f2_play_pvp = [&]() { this->pvp = true; this->render_vista(3); };
+    function<void()> f2_play_pve = [&]() { this->pvp = false; this->render_vista(3); };
     function<void()> f3_custom = [this]() { this->render_vista(5); };
-    temp.push_back(make_shared<button>("RANKING", 230, 320, 430, 400, f1_rank));
-    temp.push_back(make_shared<button>("JUGAR", 440, 320, 640, 400, f2_play));
-    temp.push_back(make_shared<button>("PERZONALIZAR", 650, 320, 850, 400, f3_custom));
+    temp.push_back(make_shared<button>("JUGAR PVP", 440, 170, 640, 260, f2_play_pvp));
+    temp.push_back(make_shared<button>("JUGAR PVE", 440, 270, 640, 360, f2_play_pve));
+    temp.push_back(make_shared<button>("RANKING", 440, 370, 640, 460, f1_rank));
+    temp.push_back(make_shared<button>("PERZONALIZAR", 440, 470, 640, 560, f3_custom));
     return temp;
 }
 
@@ -104,17 +100,24 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
     }
 
     temp.push_back(make_shared<playerA>(9, 100, 100, al_map_rgb(255, 0, 0), 100, 675, mapa));
-    temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa));
+    cout << pvp << endl;
+    if (pvp)
+        temp.push_back(make_shared<playerB>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa));
+    else
+        temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa));
+
     return temp;
 }
 
 vector<std::shared_ptr<components>> interface::create_rank() {
     vector<std::shared_ptr<components>> temp;
-    temp.push_back(make_shared<label>("User", H / 2 - 100, 20, H / 2 - 50, 60));
-    temp.push_back(make_shared<label>("Score", H / 2 + 50, 20, H / 2 + 100, 60));
+    temp.push_back(make_shared<label>("User", H / 2 - 100, 20, H / 2 - 50, 60,
+                                      al_map_rgb(255,255,255), al_map_rgb(0, 0, 0)));
+    temp.push_back(make_shared<label>("Score", H / 2 + 50, 20, H / 2 + 100, 60,
+                                      al_map_rgb(255,255,255), al_map_rgb(0, 0, 0)));
     ifstream f("../rank");
     if (f.is_open()) {
-        map<string, string> datos;
+        unordered_map<string, string> datos;
         string name;
         string score;
         int c = 0;
@@ -130,14 +133,16 @@ vector<std::shared_ptr<components>> interface::create_rank() {
             }
             c++;
         }
-        datos.insert({name, score});
+
         int i = 0;
         for (auto &[a, b]: datos) {
             cout << a << "\t" << b << endl;
             const char *t_name = a.c_str();
             const char *t_score = b.c_str();
-            temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 100 + i * 20, H / 2 - 50, 120 + i * 20));
-            temp.push_back(make_shared<label>(t_score, H / 2 + 50, 100 + i * 20, H / 2 + 100, 120 + i * 20));
+            temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 100 + i * 20, H / 2 - 50, 120 + i * 20,
+                                              al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
+            temp.push_back(make_shared<label>(t_score, H / 2 + 50, 100 + i * 20, H / 2 + 100, 120 + i * 20,
+                                              al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
             i++;
         }
     }

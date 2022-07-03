@@ -24,6 +24,9 @@ using namespace std;
 class interface {
     int H;
     int V;
+    int score_parcial = 0;
+    bool pvp = false;
+    string user;
     vector<std::shared_ptr<components>> *data = nullptr;
     int current_v;
     unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map, 4:rank

@@ -10,7 +10,7 @@
 #include "player.h"
 #include <random>
 
-class playerB: player{
+class playerB: public player{
 public:
     playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map): player(c,x,y,color,xs,ys,map){
         alter_map();
