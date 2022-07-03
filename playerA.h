@@ -10,7 +10,7 @@
 class playerA: public player{
 
 public:
-    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys): player(c,x,y,color,xs,ys){
+    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map): player(c,x,y,color,xs,ys,map){
         alter_map();
     }
 

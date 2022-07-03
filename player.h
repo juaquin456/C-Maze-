@@ -63,11 +63,10 @@ protected:
 //                         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"};
 
 public:
-    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys);
+    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** &map);
     void draw();
     virtual void alter_map();
     virtual void move() = 0;
-    char ** llenar_mapa(const string& file,int x,int y);
 };
 
 

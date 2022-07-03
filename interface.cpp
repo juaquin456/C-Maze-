@@ -93,7 +93,7 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
     vector<std::shared_ptr<components>> temp;
 
 
-    char **mapa = llenar_mapa("mapa.txt",33,55);
+    char **mapa = llenar_mapa("../mapa.txt",33,55);
 
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 55; j++) {
@@ -103,8 +103,8 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
         }
     }
 
-    temp.push_back(make_shared<playerA>(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600));
-    temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600));
+    temp.push_back(make_shared<playerA>(9, 100, 100, al_map_rgb(255, 0, 0), 100, 675, mapa));
+    temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa));
     return temp;
 }
 

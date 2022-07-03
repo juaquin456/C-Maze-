@@ -12,7 +12,7 @@
 
 class playerB: player{
 public:
-    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys): player(c,x,y,color,xs,ys){
+    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map): player(c,x,y,color,xs,ys,map){
         alter_map();
     }
     void alter_map() override{
