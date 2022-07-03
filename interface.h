@@ -15,6 +15,7 @@
 #include "textbox.h"
 #include "label.h"
 #include "bot.h"
+#include "player.h"
 #include "playerA.h"
 #include "playerB.h"
 
@@ -45,6 +46,7 @@ public:
     vector<std::shared_ptr<components>> getVista();
 
     int currentView() const;
+    char ** llenar_mapa(const string& file,int x,int y);
 
 };
 

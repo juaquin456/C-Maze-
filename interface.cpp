@@ -9,7 +9,28 @@
 #include "interface.h"
 
 
+char **interface::llenar_mapa(const string &file, int x, int y) {
+    ifstream archivo(file);
+    char** array;
+    array = new char*[x];
+    string linea;
+    int w = 0;
 
+    for (int h = 0; h < x; h++)
+    {
+        array[h] = new char[y];
+        getline(archivo,linea);
+        w = 0;
+
+        for(char k:linea){
+            array[h][w] =k;
+            w++;
+        }
+    }
+
+
+    return array;
+}
 void interface::render_vista(int n_interface) {
     if (interfaces.find(n_interface) == interfaces.end()) {
         switch (n_interface) {
@@ -71,39 +92,8 @@ vector<std::shared_ptr<components>> interface::create_menu() {
 vector<std::shared_ptr<components>> interface::create_mapa() {
     vector<std::shared_ptr<components>> temp;
 
-    char mapa[33][55] = {"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                         "x x     xxx       x        x x    x   xx     xxxxxx xx",
-                         "x   x x   x xxxxx x xxxxxx   x xxxxxx  xxx x      x  x",
-                         "xxxxx xxx x x  x  x  x   x x   x    xx x xxx xxxx xx x",
-                         "x   x x x   x xx xx xx xxx x x      x           x  x x",
-                         "x x   x xxxxx    x   x x   x xxxxxx xx xxxx xxx x xx x",
-                         "x xxxxx     x xxxx x   x x x  x   x  x  x     x   x  x",
-                         "x x     x xxx x    xx xx xxxx xxx xx    x x xxx x   xx",
-                         "x xxxxxxx   x xx x    x     x   x  xxxx x   x   x xxxx",
-                         "x x     xx xx  x xxxx x xxx xx  x xx x  x x xx xx    x",
-                         "x x xxx x   x xx    x x x    xx   x  x xx x  x x   x x",
-                         "x   x x   x x    xx x x   xx  x x x       xx x x x x x",
-                         "x xxx   x x x xx x  x x x       x xxxx  x  x     x x x",
-                         "x x   x x x    x xx x x xxxxxxx x  x x xx xxxx x x x x",
-                         "x x xxx x xxx xx    x   x x   x x  x x  x      x x xxx",
-                         "x   x   x x x    xxxx x   xx xx    x   xxxx xxxx x   x",
-                         "xxxxx xxx x   xx x    x x  x  x x  x x x     x     xxx",
-                         "x     x     x  xxx xxxx xx x xxxxx   x x xxx xxxxx x x",
-                         "xxxx xx x xxx      x     x         x x     x   x x x x",
-                         "x x   x x x   xx xxx xxx x x  xxxxxx x xxxxxxx   x   x",
-                         "x xxx xxx xx xx   x  x x x xx x    x x         x   x x",
-                         "x x   x    x x  x x xx x x  x x xx   xxxxx x xxx x x x",
-                         "x   x xxxx x xxxx x x    xx x x  x x x x   x x x x xxx",
-                         "x x x x  x   x  x x x  x  x x   xx x   x x x   x x   x",
-                         "x xxx xx x x xx x x xx xx x   x x  x x   x xxx x x x x",
-                         "x x      x x    x x  x  x   xxx xxxxxx x x       x x x",
-                         "x xxxx xxx xxx xx   xxx x x x x   x  x x   x xxxxx xxx",
-                         "x    x       x  x x x x   x x x x    x   x xxx      xx",
-                         "xxxx x xxx x xx   x   x x x x x xxxx x x x   xx xxx  x",
-                         "x    x   x x  xxx x x x x   x x x  x x x xxx  x x x  x",
-                         "xx xxx xxx xx x x xxx x xxx x   x xx   x x x xx x xx x",
-                         "x  x   x        x     x   x x x    x xxx   x    x    x",
-                         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"};
+
+    char **mapa = llenar_mapa("mapa.txt",33,55);
 
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 55; j++) {
@@ -158,3 +148,5 @@ vector<std::shared_ptr<components>> interface::create_rank() {
 }
 
 interface::interface(int h, int v) : H(h), V(v) {}
+
+

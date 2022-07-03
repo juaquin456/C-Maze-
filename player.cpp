@@ -13,7 +13,16 @@ int player::ale_x() {
 }
 
 player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys) : cantidad_items(c), x(x), y(y), a(color), x_score(xs), y_score(ys),
-                                                                           components(0,0,0,0) {}
+                                                                           components(0,0,0,0) {
+    char **map = llenar_mapa("mapa.txt",33,55);
+
+    for(int i=0;i<33;i++){
+        for(int j=0;j<55;j++){
+            mapa[i][j] = map[i][j];
+        }
+
+    }
+}
 
 void player::draw() {
     al_draw_filled_rectangle(x-5, y-5, x + 5, y + 5, a);
@@ -38,4 +47,27 @@ void player::alter_map() {
         }
     }
 
+}
+
+char **player::llenar_mapa(const string &file, int x, int y) {
+    ifstream archivo(file);
+    char** array;
+    array = new char*[x];
+    string linea;
+    int w = 0;
+
+    for (int h = 0; h < x; h++)
+    {
+        array[h] = new char[y];
+        getline(archivo,linea);
+        w = 0;
+
+        for(char k:linea){
+            array[h][w] =k;
+            w++;
+        }
+    }
+
+
+    return array;
 }
