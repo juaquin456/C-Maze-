@@ -4,24 +4,26 @@
 #include "tsp.h"
 
 constexpr int INF = 1e9;
-int dx[4] = { -1, 0, 1, 0 };
-int dy[4] = { 0, 1, 0, -1 };
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
 bool vis[N][N];
 int previousStep[N][N][N];
 //arr der aba  izq
 int dist[N][N][N];
-void bfs(char (*A)[N], int index, vector <pair<int, int>> cities) {
+
+void bfs(char (*A)[N], int index, vector<pair<int, int>> cities) {
     int n = 33, m = 55, cont = 7;
     queue<pair<int, int>> q;
     pair<int, int> begin = cities[index];
     q.push(begin);
     vis[begin.f][begin.s] = true;
     while (!q.empty()) {
-        ii u = q.front(); q.pop();
+        ii u = q.front();
+        q.pop();
         //if (A[u.f][u.s] == '#') cont--;
 
         for (int i = 0; i < 4; i++) {
-            ii v = { u.f + dx[i], u.s + dy[i] };
+            ii v = {u.f + dx[i], u.s + dy[i]};
             if (v.f < 0 || v.f >= n || v.s < 0 || v.s >= m) continue;
             if (A[v.f][v.s] == 'x') continue;
             if (vis[v.f][v.s]) continue;
@@ -49,7 +51,8 @@ int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>> &state, v
         if (i == pos || (visited & (1 << i)) != 0)
             continue;
 
-        int distance = dist[cities[i].f][cities[i].s][pos] + tsp(init, i, visited | (1 << i), state, parent, cont, cities);
+        int distance =
+                dist[cities[i].f][cities[i].s][pos] + tsp(init, i, visited | (1 << i), state, parent, cont, cities);
         if (distance < ans) {
             ans = distance;
             parent[pos][visited] = i;
@@ -68,7 +71,7 @@ void init(char (*mapa)[55], int n, int m, vector<pair<int, int>> &cities) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             if (mapa[i][j] == '#')
-                cities.push_back({ i, j });
+                cities.push_back({i, j});
 
     for (int i = 0; i < cities.size(); i++) {
         bfs(mapa, i, cities);
@@ -90,8 +93,9 @@ vector<pair<int, int>> getPath(pair<int, int> begin, char (*mapa)[55], int n, in
     init(mapa, n, m, cities);
     int cont = cities.size();
     map<pair<int, int>, int> ids;
-    for (int i = 0; i < cont; i++)
+    for (int i = 0; i < cont; i++) {
         ids[cities[i]] = i;
+    }
     // tsp
     vector<vector<int>> state(cont, vector<int>((long long) 1 << cont, INF));
     vector<vector<int>> parent(cont, vector<int>((long long) 1 << cont, 0));
@@ -119,11 +123,12 @@ vector<pair<int, int>> getPath(pair<int, int> begin, char (*mapa)[55], int n, in
         end = camino[i + 1];
         while (end != begin) {
             int p = previousStep[end.f][end.s][ids[begin]];
-            steps.push_back({ end.f, end.s });
-            end = { end.f - dx[p], end.s - dy[p] };
+            steps.push_back({end.f, end.s});
+            end = {end.f - dx[p], end.s - dy[p]};
+            cout << "ok" << endl;
         }
         reverse(steps.begin(), steps.end());
-        for (auto x : steps) {
+        for (auto x: steps) {
             path.push_back(x);
         }
     }

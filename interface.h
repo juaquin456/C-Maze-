@@ -22,15 +22,8 @@
 using namespace std;
 
 class interface {
-    int H;
-    int V;
-    int score_parcial = 0;
-    bool pvp = false;
-    string user;
     vector<std::shared_ptr<components>> *data = nullptr;
-    int current_v;
     unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map, 4:rank
-
     vector<std::shared_ptr<components>> create_input();
 
     vector<std::shared_ptr<components>> create_menu();
@@ -39,6 +32,11 @@ class interface {
 
     vector<std::shared_ptr<components>> create_rank();
 
+    string user;
+    int H;
+    int V;
+    int current_v;
+    bool pvp = false;
 public:
     interface() = default;
 
@@ -49,7 +47,8 @@ public:
     vector<std::shared_ptr<components>> getVista();
 
     int currentView() const;
-    char ** llenar_mapa(const string& file,int x,int y);
+
+    char **llenar_mapa(const string &file, int x, int y);
 
 };
 

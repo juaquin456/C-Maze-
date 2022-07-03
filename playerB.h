@@ -7,19 +7,21 @@
 
 
 #include <iostream>
-#include "player.h"
 #include <random>
+#include "player.h"
 
-class playerB: public player{
+class playerB : public player {
 public:
-    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map): player(c,x,y,color,xs,ys,map){
+    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map) : player(c, x, y, color, xs, ys,
+                                                                                           map) {
         alter_map();
     }
-    void alter_map() override{
+
+    void alter_map() override {
         player::alter_map();
     }
 
-    void move()override {
+    void move() override {
         k->update();
         if (k->is_key_down(ALLEGRO_KEY_UP)) {
             if (mapa[(y - 7) / 20][x / 20] != 'x')
@@ -30,17 +32,17 @@ public:
                 y += 2;
         }
         if (k->is_key_down(ALLEGRO_KEY_LEFT)) {
-            if (mapa[(y) / 20][(x-7) / 20] != 'x')
+            if (mapa[(y) / 20][(x - 7) / 20] != 'x')
                 x -= 2;
         }
         if (k->is_key_down(ALLEGRO_KEY_RIGHT)) {
-            if (mapa[(y) / 20][(x+7) / 20] != 'x')
+            if (mapa[(y) / 20][(x + 7) / 20] != 'x')
                 x += 2;
         }
-        if((mapa[(y/20)][(x/20)]) =='#'){
+        if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
-            mapa[(y/20)][(x/20)] = ' ';
-            items.erase((int)(y/20)*55 + (int)x/20);
+            mapa[(y / 20)][(x / 20)] = ' ';
+            items.erase((int) (y / 20) * 55 + (int) x / 20);
             puntos++;
         }
     }

@@ -17,7 +17,7 @@
 #include "bot.h"
 
 
-void must_init(bool test, const char* description) {
+void must_init(bool test, const char *description) {
     if (test) return;
 
     printf("couldn't initialize %s\n", description);
@@ -35,21 +35,21 @@ void application::run() {
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
 
-    ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
+    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
     must_init(timer, "timer");
 
-    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     must_init(queue, "queue");
 
     al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    auto& disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(H, V))->get();
+    auto &disp = Display<ALLEGRO_DISPLAY *>::getInstance(al_create_display(H, V))->get();
     //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
     must_init(*disp, "display");
 
-    ALLEGRO_FONT* font = al_create_builtin_font();
+    ALLEGRO_FONT *font = al_create_builtin_font();
     must_init(font, "font");
 
     must_init(al_init_primitives_addon(), "primitives");
@@ -63,8 +63,8 @@ void application::run() {
     bool redraw = true;
     ALLEGRO_EVENT event;
 
-    Keyboard* k = Keyboard::get_instance();
-    Mouse* m = Mouse::getInstance();
+    Keyboard *k = Keyboard::get_instance();
+    Mouse *m = Mouse::getInstance();
     al_start_timer(timer);
     //playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
     //bot Q(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600);
@@ -83,7 +83,7 @@ void application::run() {
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 
 
-                for (auto const e : v.getVista()) {
+                for (auto const e: v.getVista()) {
                     if (e->is_on_bound()) {
                         e->click_event();
                     }
@@ -92,7 +92,7 @@ void application::run() {
 
             case ALLEGRO_EVENT_KEY_DOWN:
 
-                for (auto const e : v.getVista()) {
+                for (auto const e: v.getVista()) {
                     if (e->is_press_key())
                         e->key_event(event.keyboard.keycode);
                 }
@@ -114,7 +114,7 @@ void application::run() {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
 
-            for (auto const e : v.getVista()) {
+            for (auto const e: v.getVista()) {
                 e->draw();
             }
             /*if (v.currentView() == 3) {

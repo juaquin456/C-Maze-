@@ -11,19 +11,18 @@
 
 char **interface::llenar_mapa(const string &file, int x, int y) {
     ifstream archivo(file);
-    char** array;
-    array = new char*[x];
+    char **array;
+    array = new char *[x];
     string linea;
     int w = 0;
 
-    for (int h = 0; h < x; h++)
-    {
+    for (int h = 0; h < x; h++) {
         array[h] = new char[y];
-        getline(archivo,linea);
+        getline(archivo, linea);
         w = 0;
 
-        for(char k:linea){
-            array[h][w] =k;
+        for (char k: linea) {
+            array[h][w] = k;
             w++;
         }
     }
@@ -31,6 +30,7 @@ char **interface::llenar_mapa(const string &file, int x, int y) {
 
     return array;
 }
+
 void interface::render_vista(int n_interface) {
     if (interfaces.find(n_interface) == interfaces.end()) {
         switch (n_interface) {
@@ -63,11 +63,12 @@ int interface::currentView() const {
 
 vector<std::shared_ptr<components>> interface::create_input() {
     vector<std::shared_ptr<components>> temp;
-    function<void(string)> fun_write = [this](const string& text) {
+    function<void(string)> fun_write = [this](const string &text) {
         this->user = text;
         this->render_vista(2);
     };
-    temp.push_back(make_shared<label>("Ingrese su usuario:", 440, 290, 640, 350, al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
+    temp.push_back(make_shared<label>("Ingrese su usuario:", 440, 290, 640, 350, al_map_rgb(0, 0, 0),
+                                      al_map_rgb(255, 255, 255)));
     temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, fun_write));
     return temp;
 }
@@ -75,8 +76,14 @@ vector<std::shared_ptr<components>> interface::create_input() {
 vector<std::shared_ptr<components>> interface::create_menu() {
     vector<std::shared_ptr<components>> temp;
     function<void()> f1_rank = [this]() { this->render_vista(4); };
-    function<void()> f2_play_pvp = [&]() { this->pvp = true; this->render_vista(3); };
-    function<void()> f2_play_pve = [&]() { this->pvp = false; this->render_vista(3); };
+    function<void()> f2_play_pvp = [&]() {
+        this->pvp = true;
+        this->render_vista(3);
+    };
+    function<void()> f2_play_pve = [&]() {
+        this->pvp = false;
+        this->render_vista(3);
+    };
     function<void()> f3_custom = [this]() { this->render_vista(5); };
     temp.push_back(make_shared<button>("JUGAR PVP", 440, 170, 640, 260, f2_play_pvp));
     temp.push_back(make_shared<button>("JUGAR PVE", 440, 270, 640, 360, f2_play_pve));
@@ -88,13 +95,14 @@ vector<std::shared_ptr<components>> interface::create_menu() {
 vector<std::shared_ptr<components>> interface::create_mapa() {
     vector<std::shared_ptr<components>> temp;
 
-
-    char **mapa = llenar_mapa("../mapa.txt",33,55);
+    int x = 33;
+    int y = 55;
+    char **mapa = llenar_mapa("../mapa.txt", 33, 55);
 
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 55; j++) {
             if (mapa[i][j] == 'x') {
-                temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20-3));
+                temp.push_back(make_shared<block>(j * 20, i * 20, (j + 1) * 20 - 3, (i + 1) * 20 - 3));
             }
         }
     }
@@ -112,9 +120,9 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
 vector<std::shared_ptr<components>> interface::create_rank() {
     vector<std::shared_ptr<components>> temp;
     temp.push_back(make_shared<label>("User", H / 2 - 100, 20, H / 2 - 50, 60,
-                                      al_map_rgb(255,255,255), al_map_rgb(0, 0, 0)));
+                                      al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     temp.push_back(make_shared<label>("Score", H / 2 + 50, 20, H / 2 + 100, 60,
-                                      al_map_rgb(255,255,255), al_map_rgb(0, 0, 0)));
+                                      al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     ifstream f("../rank");
     if (f.is_open()) {
         unordered_map<string, string> datos;
@@ -140,9 +148,9 @@ vector<std::shared_ptr<components>> interface::create_rank() {
             const char *t_name = a.c_str();
             const char *t_score = b.c_str();
             temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 100 + i * 20, H / 2 - 50, 120 + i * 20,
-                                              al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
+                                              al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
             temp.push_back(make_shared<label>(t_score, H / 2 + 50, 100 + i * 20, H / 2 + 100, 120 + i * 20,
-                                              al_map_rgb(0,0,0), al_map_rgb(255, 255, 255)));
+                                              al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
             i++;
         }
     }

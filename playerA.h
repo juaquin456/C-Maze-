@@ -4,17 +4,19 @@
 
 #ifndef PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H
 #define PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H
+
 #include <iostream>
 #include "player.h"
 
-class playerA: public player{
+class playerA : public player {
 
 public:
-    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map): player(c,x,y,color,xs,ys,map){
+    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map) : player(c, x, y, color, xs, ys,
+                                                                                           map) {
         alter_map();
     }
 
-    void alter_map() override{
+    void alter_map() override {
         player::alter_map();
     }
 
@@ -29,23 +31,22 @@ public:
                 y += 2;
         }
         if (k->is_key_down(ALLEGRO_KEY_A)) {
-            if (mapa[(y) / 20][(x-7) / 20] != 'x')
+            if (mapa[(y) / 20][(x - 7) / 20] != 'x')
                 x -= 2;
         }
         if (k->is_key_down(ALLEGRO_KEY_D)) {
-            if (mapa[(y) / 20][(x+7) / 20] != 'x')
+            if (mapa[(y) / 20][(x + 7) / 20] != 'x')
                 x += 2;
         }
-        if((mapa[(y/20)][(x/20)]) =='#'){
+        if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
-            mapa[(y/20)][(x/20)] = ' ';
-            items.erase((int)(y/20)*55 + (int)x/20);
+            mapa[(y / 20)][(x / 20)] = ' ';
+            items.erase((int) (y / 20) * 55 + (int) x / 20);
             puntos++;
         }
     }
 
 };
-
 
 
 #endif //PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYERA_H
