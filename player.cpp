@@ -30,7 +30,7 @@ void player::draw() {
         v.draw();
     }
     if (cantidad_items != puntos) {
-        static_tiempo = (clock()-current_tiempo)/CLOCKS_PER_SEC;
+        static_tiempo = (clock()-current_tiempo)/CLOCKS_PER_SEC*2;
         //cout << name << '\n';
     }
     else if(who_was == "playerA" && seen) {

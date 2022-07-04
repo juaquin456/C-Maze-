@@ -5,8 +5,8 @@
 
 constexpr int INF = 1e9;
 constexpr int N = 54;
-int dx[4] = { -1, 0, 1, 0 };
-int dy[4] = { 0, 1, 0, -1 };
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
 bool vis[N][N];
 int previousStep[N][N][N];
 //arr der aba  izq
@@ -19,12 +19,12 @@ void bfs(char(*A)[N], int index, vector<pair<int, int>> cities) {
     q.push(begin);
     vis[begin.first][begin.second] = true;
     while (!q.empty()) {
-        pair<int,int> u = q.front();
+        pair<int, int> u = q.front();
         q.pop();
         //if (A[u.f][u.s] == '#') cont--;
 
         for (int i = 0; i < 4; i++) {
-            pair<int,int> v = { u.first + dx[i], u.second + dy[i] };
+            pair<int, int> v = {u.first + dx[i], u.second + dy[i]};
             if (v.first < 0 || v.first >= n || v.second < 0 || v.second >= m) continue;
             if (A[v.first][v.second] == 'x') continue;
             if (vis[v.first][v.second]) continue;
@@ -36,8 +36,8 @@ void bfs(char(*A)[N], int index, vector<pair<int, int>> cities) {
     }
 }
 
-int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>>& state, vector<vector<int>>& parent, int cont,
-    vector<pair<int, int>> cities) {
+int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>> &state, vector<vector<int>> &parent, int cont,
+        vector<pair<int, int>> cities) {
 
     if (visited == ((1 << cont) - 1))
         return 0; // no volver a la ciudad de partida
@@ -53,7 +53,8 @@ int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>>& state, v
             continue;
 
         int distance =
-            dist[cities[i].first][cities[i].second][pos] + tsp(init, i, visited | (1 << i), state, parent, cont, cities);
+                dist[cities[i].first][cities[i].second][pos] +
+                tsp(init, i, visited | (1 << i), state, parent, cont, cities);
         if (distance < ans) {
             ans = distance;
             parent[pos][visited] = i;
@@ -63,7 +64,7 @@ int tsp(pair<int, int> init, int pos, int visited, vector<vector<int>>& state, v
 
 }
 
-void init(char(*mapa)[54], int n, int m, vector<pair<int, int>>& cities) {
+void init(char(*mapa)[54], int n, int m, vector<pair<int, int>> &cities) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             for (int k = 0; k < n; k++)
@@ -72,7 +73,7 @@ void init(char(*mapa)[54], int n, int m, vector<pair<int, int>>& cities) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             if (mapa[i][j] == '#')
-                cities.push_back({ i, j });
+                cities.push_back({i, j});
 
     for (int i = 0; i < cities.size(); i++) {
         bfs(mapa, i, cities);
@@ -91,14 +92,14 @@ vector<pair<int, int>> getPath(pair<int, int> begin, char(*mapa)[54], int n, int
     vector<pair<int, int>> cities;
     cities.push_back(begin);
     init(mapa, n, m, cities);
-    int cont = (int)cities.size();
+    int cont = (int) cities.size();
     map<pair<int, int>, int> ids;
     for (int i = 0; i < cont; i++) {
         ids[cities[i]] = i;
     }
     // tsp
-    vector<vector<int>> state(cont, vector<int>((long long)1 << cont, INF));
-    vector<vector<int>> parent(cont, vector<int>((long long)1 << cont, 0));
+    vector<vector<int>> state(cont, vector<int>((long long) 1 << cont, INF));
+    vector<vector<int>> parent(cont, vector<int>((long long) 1 << cont, 0));
 
     int ans = tsp(begin, 0, 1, state, parent, cont, cities);
     // find path tsp
@@ -123,11 +124,11 @@ vector<pair<int, int>> getPath(pair<int, int> begin, char(*mapa)[54], int n, int
         end = camino[i + 1];
         while (end != begin) {
             int p = previousStep[end.first][end.second][ids[begin]];
-            steps.push_back({ end.first, end.second });
-            end = { end.first - dx[p], end.second - dy[p] };
+            steps.push_back({end.first, end.second});
+            end = {end.first - dx[p], end.second - dy[p]};
         }
         reverse(steps.begin(), steps.end());
-        for (auto x : steps) {
+        for (auto x: steps) {
             path.push_back(x);
         }
     }

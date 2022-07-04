@@ -12,8 +12,9 @@
 
 class playerB : public player {
 public:
-    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map,clock_t tiempo,string username) : player(c, x, y, color, xs, ys,
-        map,tiempo,username) {
+    playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username)
+            : player(c, x, y, color, xs, ys,
+                     map, tiempo, username) {
         alter_map();
         who_was = "playerB";
     }
@@ -43,7 +44,7 @@ public:
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
-            items.erase((int)(y / 20) * 54 + (int)x / 20);
+            items.erase((int) (y / 20) * 54 + (int) x / 20);
             puntos++;
         }
     }

@@ -8,7 +8,7 @@
 using namespace std;
 
 class bot : public player {
-    vector<pair<int, int>> route = { {0, 0} };
+    vector<pair<int, int>> route = {{0, 0}};
     int cambio_x = 0;
     int cambio_y = 0;
     int sz = 0;
@@ -16,7 +16,8 @@ class bot : public player {
     int pasos = 0;
 
 public:
-    bot(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map,clock_t tiempo,string username) : player(c, x, y, color, xs, ys, map,tiempo,username) {
+    bot(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username) : player(
+            c, x, y, color, xs, ys, map, tiempo, username) {
         alter_map();
         who_was = "bot";
         name = "bot";
@@ -25,8 +26,8 @@ public:
     void alter_map() override {
         player::alter_map();
 
-        route = getPath({ 0, 1 }, mapa, 33, 54);
-        sz = (int)route.size();
+        route = getPath({0, 1}, mapa, 33, 54);
+        sz = (int) route.size();
     }
 
     void move() override {
@@ -57,7 +58,7 @@ public:
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
-            items.erase((int)(y / 20) * 54 + (int)x / 20);
+            items.erase((int) (y / 20) * 54 + (int) x / 20);
             puntos++;
         }
     }
