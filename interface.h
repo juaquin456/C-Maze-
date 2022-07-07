@@ -51,7 +51,7 @@ public:
 
     int currentView() const;
 
-    char **llenar_mapa(const string &file, int x, int y);
+    char **llenar_mapa(const string &file,const int& x, const int& y);
 
 };
 

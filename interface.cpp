@@ -11,7 +11,7 @@
 #include "interface.h"
 
 
-char **interface::llenar_mapa(const string &file, int x, int y) {
+char **interface::llenar_mapa(const string &file,const int& x, const int& y) {
     ifstream archivo(file);
     char **array1;
     array1 = new char *[x];
@@ -195,6 +195,14 @@ vector<std::shared_ptr<components>> interface::create_input_map(){
     temp.push_back(make_shared<button>("MAPA 1", 240, 270, 430, 360, choose_map1));
     temp.push_back(make_shared<button>("MAPA 2", 440, 270, 630, 360, choose_map2));
     temp.push_back(make_shared<button>("MAPA 3", 640, 270, 830, 360, choose_map3));
+
+    for (int i = 0; i < 33; i++) {
+        for (int j = 0; j < 54; j++) {
+            if (mapa[i][j] == 'x') {
+                temp.push_back(make_shared<block>(432+j * 4,500+ i * 4,432+ (j + 1) * 4, 500+(i + 1) * 4));
+            }
+        }
+    }
 
     function<void()> fn = [this]() { this->render_vista(2); };
     temp.push_back(make_shared<button>("Retroceder", 840, 600, 1000, 650, fn));
