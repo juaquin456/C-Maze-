@@ -15,7 +15,7 @@ player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**&
 a(color), x_score(xs),
 y_score(ys),
 components(0, 0, 0, 0) {
-    current_tiempo = tiempo;
+    current_tiempo = clock();
     if(username != "") name = username;
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 54; j++) {
@@ -30,7 +30,7 @@ void player::draw() {
         v.draw();
     }
     if (cantidad_items != puntos) {
-        static_tiempo = (clock()-current_tiempo)/CLOCKS_PER_SEC*2;
+        static_tiempo = (clock()-current_tiempo)/CLOCKS_PER_SEC;
         //cout << name << '\n';
     }
     else if(who_was == "playerA" && seen) {

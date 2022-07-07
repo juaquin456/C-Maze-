@@ -34,6 +34,10 @@ char **interface::llenar_mapa(const string &file,const int& x, const int& y) {
 }
 
 void interface::render_vista(int n_interface) {
+    if(n_interface == 5){
+        interfaces.erase(n_interface);
+    }
+
     if (interfaces.find(n_interface) == interfaces.end()) {
         switch (n_interface) {
             case 1:
@@ -177,17 +181,17 @@ vector<std::shared_ptr<components>> interface::create_input_map(){
     vector<std::shared_ptr<components>> temp;
 
     function<void()> choose_map1 = [this](){
-        this->map_name = "../mapa.txt";
+        this->map_name = "../maps/mapa.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
     function<void()> choose_map2 = [this](){
-        this->map_name = "../mapa.txt";
+        this->map_name = "../maps/mapa2.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
     function<void()> choose_map3 = [this](){
-        this->map_name = "../mapa.txt";
+        this->map_name = "../maps/mapa.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
