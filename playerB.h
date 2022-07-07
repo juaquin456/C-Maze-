@@ -11,6 +11,7 @@
 #include "player.h"
 
 class playerB : public player {
+    ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
 public:
     playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username)
             : player(c, x, y, color, xs, ys,
@@ -42,6 +43,7 @@ public:
                 x += 2;
         }
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
+            al_play_sample(popi, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
             items.erase((int) (y / 20) * 54 + (int) x / 20);

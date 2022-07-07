@@ -9,6 +9,7 @@
 #include "player.h"
 
 class playerA : public player {
+    ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
 
 public:
     playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username)
@@ -41,6 +42,7 @@ public:
                 x += 2;
         }
         if ((mapa[(y / 20)][(x / 20)]) == '#') {
+            al_play_sample(pop, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
             cout << y << "\t" << x << endl;
             mapa[(y / 20)][(x / 20)] = ' ';
             items.erase((int) (y / 20) * 54 + (int) x / 20);

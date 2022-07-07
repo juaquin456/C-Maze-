@@ -11,6 +11,8 @@
 #include <memory>
 #include <list>
 #include <fstream>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include "item.h"
 #include "Keyboard.h"
 #include "components.h"

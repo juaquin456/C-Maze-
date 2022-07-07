@@ -9,6 +9,8 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -53,6 +55,12 @@ void application::run() {
     must_init(font, "font");
 
     must_init(al_init_primitives_addon(), "primitives");
+    must_init(al_install_audio(), "audio");
+    must_init(al_init_acodec_addon(), "audio codecs");
+    must_init(al_reserve_samples(16), "reserve samples");
+
+    ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
+    ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(*disp));
@@ -128,7 +136,8 @@ void application::run() {
             redraw = false;
         }
     }
-
+    al_destroy_sample(pop);
+    al_destroy_sample(popi);
     al_destroy_font(font);
     al_destroy_display(*disp);
     al_destroy_timer(timer);
