@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include<ctime>
+#include <utility>
 #include "interface.h"
 
 
@@ -47,6 +48,9 @@ void interface::render_vista(int n_interface) {
                 break;
             case 4:
                 interfaces.insert({n_interface, create_rank()});
+                break;
+            case 5:
+                interfaces.insert({n_interface, create_input_map()});
                 break;
         }
     }
@@ -90,7 +94,7 @@ vector<std::shared_ptr<components>> interface::create_menu() {
     temp.push_back(make_shared<button>("JUGAR PVP", 440, 170, 640, 260, f2_play_pvp));
     temp.push_back(make_shared<button>("JUGAR PVE", 440, 270, 640, 360, f2_play_pve));
     temp.push_back(make_shared<button>("RANKING", 440, 370, 640, 460, f1_rank));
-    temp.push_back(make_shared<button>("PERZONALIZAR", 440, 470, 640, 560, f3_custom));
+    temp.push_back(make_shared<button>("MAPA", 440, 470, 640, 560, f3_custom));
     return temp;
 }
 
@@ -99,7 +103,7 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
 
     int x = 33;
     int y = 54;
-    char **mapa = llenar_mapa("../mapa.txt", 33, 54);
+
 
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 54; j++) {
@@ -165,6 +169,36 @@ vector<std::shared_ptr<components>> interface::create_rank() {
     }
     function<void()> fn = [this]() { this->render_vista(2); };
     temp.push_back(make_shared<button>("Retroceder", 840, 600, 1000, 650, fn));
+
+    return temp;
+}
+
+vector<std::shared_ptr<components>> interface::create_input_map(){
+    vector<std::shared_ptr<components>> temp;
+
+    function<void()> choose_map1 = [this](){
+        this->map_name = "../mapa.txt";
+        this->mapa = llenar_mapa(map_name, 33, 54);
+        this->render_vista(5);
+    };
+    function<void()> choose_map2 = [this](){
+        this->map_name = "../mapa.txt";
+        this->mapa = llenar_mapa(map_name, 33, 54);
+        this->render_vista(5);
+    };
+    function<void()> choose_map3 = [this](){
+        this->map_name = "../mapa.txt";
+        this->mapa = llenar_mapa(map_name, 33, 54);
+        this->render_vista(5);
+    };
+
+    temp.push_back(make_shared<button>("MAPA 1", 240, 270, 430, 360, choose_map1));
+    temp.push_back(make_shared<button>("MAPA 2", 440, 270, 630, 360, choose_map2));
+    temp.push_back(make_shared<button>("MAPA 3", 640, 270, 830, 360, choose_map3));
+
+    function<void()> fn = [this]() { this->render_vista(2); };
+    temp.push_back(make_shared<button>("Retroceder", 840, 600, 1000, 650, fn));
+
 
     return temp;
 }

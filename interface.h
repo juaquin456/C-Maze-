@@ -32,6 +32,9 @@ class interface {
 
     vector<std::shared_ptr<components>> create_rank();
 
+    vector<std::shared_ptr<components>> create_input_map();
+    string map_name = "../mapa.txt";
+    char ** mapa = llenar_mapa(map_name, 33, 54);
     string user;
     int H;
     int V;
