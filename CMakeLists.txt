@@ -18,7 +18,8 @@ TARGET_LINK_LIBRARIES(proyecto_final_proyecto_grupo6 allegro
         allegro_ttf
         allegro_acodec
         allegro_audio
-        allegro_font)
+        allegro_font
+        allegro_image)
 
 
 

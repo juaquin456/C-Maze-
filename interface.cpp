@@ -95,10 +95,10 @@ vector<std::shared_ptr<components>> interface::create_menu() {
         this->render_vista(3);
     };
     function<void()> f3_custom = [this]() { this->render_vista(5); };
-    temp.push_back(make_shared<button>("JUGAR PVP", 440, 170, 640, 260, f2_play_pvp));
-    temp.push_back(make_shared<button>("JUGAR PVE", 440, 270, 640, 360, f2_play_pve));
-    temp.push_back(make_shared<button>("RANKING", 440, 370, 640, 460, f1_rank));
-    temp.push_back(make_shared<button>("MAPA", 440, 470, 640, 560, f3_custom));
+    temp.push_back(make_shared<button>("JUGAR PVP", 440, 230, 640, 320, f2_play_pvp));
+    temp.push_back(make_shared<button>("JUGAR PVE", 440, 330, 640, 420, f2_play_pve));
+    temp.push_back(make_shared<button>("RANKING", 440, 430, 640, 520, f1_rank));
+    temp.push_back(make_shared<button>("MAPA", 440, 530, 640, 620, f3_custom));
     return temp;
 }
 
@@ -130,9 +130,9 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
 vector<std::shared_ptr<components>> interface::create_rank() {
 
     vector<std::shared_ptr<components>> temp;
-    temp.push_back(make_shared<label>("User", H / 2 - 100, 20, H / 2 - 50, 60,
+    temp.push_back(make_shared<label>("User", H / 2 - 100, 80, H / 2 - 50, 120,
                                       al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
-    temp.push_back(make_shared<label>("Score", H / 2 + 50, 20, H / 2 + 100, 60,
+    temp.push_back(make_shared<label>("Score", H / 2 + 50, 80, H / 2 + 100, 120,
                                       al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     ifstream f("rank");
     if (f.is_open()) {

@@ -11,6 +11,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
 
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -58,9 +59,15 @@ void application::run() {
     must_init(al_install_audio(), "audio");
     must_init(al_init_acodec_addon(), "audio codecs");
     must_init(al_reserve_samples(16), "reserve samples");
+    must_init(al_init_image_addon(),"imagen");
 
     ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
     ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
+
+    ALLEGRO_BITMAP* user_input = al_load_bitmap("../images/user.png");
+    ALLEGRO_BITMAP* menu_image = al_load_bitmap("../images/menu.png");
+    ALLEGRO_BITMAP* rank_image = al_load_bitmap("../images/ranking.png");
+    ALLEGRO_BITMAP* maps_image = al_load_bitmap("../images/maps.png");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(*disp));
@@ -121,10 +128,23 @@ void application::run() {
         if (redraw && al_is_event_queue_empty(queue)) {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
+            if (v.currentView() == 1) {
+                al_draw_bitmap(user_input,0,0,0);
+            }
+            else if (v.currentView() == 2) {
+                al_draw_bitmap(menu_image,0,0,0);
+            }
+            else if (v.currentView() == 4) {
+                al_draw_bitmap(rank_image,0,0,0);
+            }
+            else if (v.currentView() == 5) {
+                al_draw_bitmap(maps_image,0,0,0);
+            }
 
             for (auto const e: v.getVista()) {
                 e->draw();
             }
+
             /*if (v.currentView() == 3) {
                 P.draw();
                 P.move();
@@ -136,6 +156,10 @@ void application::run() {
             redraw = false;
         }
     }
+    al_destroy_bitmap(user_input);
+    al_destroy_bitmap(menu_image);
+    al_destroy_bitmap(rank_image);
+    al_destroy_bitmap(maps_image);
     al_destroy_sample(pop);
     al_destroy_sample(popi);
     al_destroy_font(font);
