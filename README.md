@@ -19,6 +19,9 @@ La implementación del programa tiene como parte fundamental la utilización de 
 
 **Ranking:** Los puntajes y nicknames se guardaran en un archivo que será leído y sobrescrito cada vez que se termine el juego. Además este guardará los puntajes ordenados
 
+## Diagrama de clases
+
+![diagrama de clases](https://user-images.githubusercontent.com/83974317/178023276-0b8491c7-06e4-49e8-a373-cc73d4e9a5e9.png)
 
 ## Partes del Programa:
 ### Menú:
