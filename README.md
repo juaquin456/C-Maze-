@@ -50,11 +50,13 @@ Al seleccionar **Jugar** se iniciará el juego y con ello un contador que se uti
 
 > [2]  Allegro webmasters.(s.f.) Allegro - A game programming library. Allegro. Recuperado el 9 de junio del 2022 de https://liballeg.org/
 
-> [3]  Brucato C.(2013). The traveling salesman problem.
+> [3]  Brucato C. (2013). The traveling salesman problem.
 https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi31qbEvOj4AhV9pZUCHarPD5oQFnoECAUQAQ&url=https%3A%2F%2Fwww.mathematics.pitt.edu%2Fsites%2Fdefault%2Ffiles%2FTSP.pdf&usg=AOvVaw3zXFgEnK8O6f157y53eOmz
 
-> [4]  Sánchez. G. (2005).Tutorial interactivo para la enseñanza y el aprendizaje de los algoritmos de búsqueda en anchura y en profundidad
+> [4]  Sánchez. G. (2005). Tutorial interactivo para la enseñanza y el aprendizaje de los algoritmos de búsqueda en anchura y en profundidad
 http://bioinfo.uib.es/~joemiro/aenui/procJenui/Jen2006/prDef0107_72b32a1f75.pdf
+
+> [5]  Gutierrez. J. (2018). Traveling Salesman solution in c++ - dynamic programming solution with O(n^2 * 2^n). Repositorio de GitHub. https://gist.github.com/jgcoded/d7ecba7aa3e210419471
 
 
 ## Equipo:
