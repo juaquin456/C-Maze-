@@ -8,9 +8,14 @@ CMAZE++ es un juego en el que tendrás que demostrar tu habilidad para resolver 
 ## Resumen del Programa:
 > El programa esta disenando con algunos patrones de diseno:
 
-1. Interfaz: abs factory  componete
-5. Keyboard singleton ,mouse diplay
-
+1. Singleton:
+   1. Mouse
+   2. Display
+   3. Keyboard
+2. Factory:
+   1. Implementación del patron factory en Interface con componentes por el motivo de que la clase Interface necesita construir los componentes, aunque no sepa cuales son, basta con la versión abstracta de esta.
+3. Command:
+   1. Implementación del patron de comportamiento command en algunos componentes como el boton, en relación con la interface, porque estos tienes funciones objetivos como renderizar una nueva vista o cambiar el valor a algunas variables.
 > Utilizacion de archivos:
 
 La implementación del programa tiene como parte fundamental la utilización de archivos en aspectos como el manejo de Ranking y mapas.
