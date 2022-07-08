@@ -2,7 +2,8 @@
 // Created by juaquin on 30/06/22.
 //
 #include "tsp.h"
-
+#include <thread>
+#include <mutex>
 constexpr int INF = 1e9;
 constexpr int N = 54;
 int dx[4] = {-1, 0, 1, 0};
@@ -11,8 +12,10 @@ bool vis[N][N];
 int previousStep[N][N][N];
 //arr der aba  izq
 int dist[N][N][N];
+mutex mtx;
 
 void bfs(char(*A)[N], int index, vector<pair<int, int>> cities) {
+    lock_guard<mutex> lg(mtx);
     int n = 33, m = 54, cont = 7;
     queue<pair<int, int>> q;
     pair<int, int> begin = cities[index];
@@ -32,6 +35,11 @@ void bfs(char(*A)[N], int index, vector<pair<int, int>> cities) {
             dist[v.first][v.second][index] = dist[u.first][u.second][index] + 1;
             previousStep[v.first][v.second][index] = i;
             q.push(v);
+        }
+    }
+    for (int j = 0; j < n; j++) {
+        for (int k = 0; k < m; k++) {
+            vis[j][k] = false;
         }
     }
 }
@@ -75,13 +83,17 @@ void init(char(*mapa)[54], int n, int m, vector<pair<int, int>> &cities) {
             if (mapa[i][j] == '#')
                 cities.push_back({i, j});
 
-    for (int i = 0; i < cities.size(); i++) {
-        bfs(mapa, i, cities);
-        for (int j = 0; j < n; j++) {
-            for (int k = 0; k < m; k++) {
-                vis[j][k] = false;
-            }
-        }
+    int n_hilos = cities.size();
+    vector<thread> vhilos(n_hilos);
+
+    int i = 0;
+    for (auto& h : vhilos) {
+        h = thread(bfs, mapa, i, cities);
+        i++;
+    }
+
+    for (auto& h : vhilos) {
+        h.join();
     }
 
 }

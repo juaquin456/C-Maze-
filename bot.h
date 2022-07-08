@@ -16,8 +16,8 @@ class bot : public player {
     int pasos = 0;
 
 public:
-    bot(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username) : player(
-            c, x, y, color, xs, ys, map, tiempo, username) {
+    bot(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username, function<void()>& f) : player(
+            c, x, y, color, xs, ys, map, tiempo, username, f) {
         alter_map();
         who_was = "bot";
         name = "bot";
@@ -60,6 +60,9 @@ public:
             mapa[(y / 20)][(x / 20)] = ' ';
             items.erase((int) (y / 20) * 54 + (int) x / 20);
             puntos++;
+            if(puntos == cantidad_items){
+                f();
+            }
         }
     }
 };

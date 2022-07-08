@@ -37,7 +37,9 @@ void interface::render_vista(int n_interface) {
     if(n_interface == 5){
         interfaces.erase(n_interface);
     }
-
+    if (n_interface == 3) {
+        interfaces.erase(n_interface);
+    }
     if (interfaces.find(n_interface) == interfaces.end()) {
         switch (n_interface) {
             case 1:
@@ -55,6 +57,9 @@ void interface::render_vista(int n_interface) {
                 break;
             case 5:
                 interfaces.insert({n_interface, create_input_map()});
+                break;
+            case 6:
+                interfaces.insert({n_interface, win()});
                 break;
         }
     }
@@ -117,12 +122,16 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
         }
     }
     clock_t tiempo = clock();
-    temp.push_back(make_shared<playerA>(9, 100, 100, al_map_rgb(255, 0, 0), 100, 675, mapa, tiempo, this->user));
+    function<void()> f_temp_win = [this](){this->render_vista(6);
+                                                this->is_win = true;};
+    function<void()> f_temp_lose = [this](){this->render_vista(6);
+        this->is_win = false;};
+    temp.push_back(make_shared<playerA>(9, 1052, 48, al_map_rgb(255, 0, 0), 100, 675, mapa, tiempo, this->user, f_temp_win));
     cout << pvp << endl;
     if (pvp)
-        temp.push_back(make_shared<playerB>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user));
+        temp.push_back(make_shared<playerB>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user, f_temp_lose));
     else
-        temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user));
+        temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user, f_temp_lose));
 
     return temp;
 }
@@ -212,6 +221,14 @@ vector<std::shared_ptr<components>> interface::create_input_map(){
     temp.push_back(make_shared<button>("Retroceder", 840, 600, 1000, 650, fn));
 
 
+    return temp;
+}
+
+vector<std::shared_ptr<components>> interface::win() {
+    std::cout << is_win << std::endl;
+    vector<std::shared_ptr<components>> temp;
+    function<void()> fi = [this]() { this->render_vista(2); };
+    temp.push_back(make_shared<button>("Inicio", 840, 600, 1000, 650, fi));
     return temp;
 }
 

@@ -33,6 +33,8 @@ class interface {
     vector<std::shared_ptr<components>> create_rank();
 
     vector<std::shared_ptr<components>> create_input_map();
+
+    vector<std::shared_ptr<components>> win();
     string map_name = "../maps/mapa.txt";
     char ** mapa = llenar_mapa(map_name, 33, 54);
     string user;
@@ -40,6 +42,7 @@ class interface {
     int V;
     int current_v;
     bool pvp = false;
+    bool is_win = false;
 public:
     interface() = default;
 
@@ -52,7 +55,6 @@ public:
     int currentView() const;
 
     char **llenar_mapa(const string &file,const int& x, const int& y);
-
 };
 
 

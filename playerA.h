@@ -12,9 +12,9 @@ class playerA : public player {
     ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
 
 public:
-    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username)
+    playerA(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **map, clock_t tiempo, string username, function<void()>& f)
             : player(c, x, y, color, xs, ys,
-                     map, tiempo, username) {
+                     map, tiempo, username, f) {
         alter_map();
         who_was = "playerA";
     }
@@ -47,6 +47,9 @@ public:
             mapa[(y / 20)][(x / 20)] = ' ';
             items.erase((int) (y / 20) * 54 + (int) x / 20);
             puntos++;
+            if(puntos == cantidad_items){
+                f();
+            }
         }
     }
 

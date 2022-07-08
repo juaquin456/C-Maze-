@@ -11,10 +11,10 @@ int player::ale_x() {
     return iSecret;
 }
 
-player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**& map,clock_t tiempo,string username) : cantidad_items(c), x(x), y(y),
+player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**& map,clock_t tiempo,string username, function<void()>& f) : cantidad_items(c), x(x), y(y),
 a(color), x_score(xs),
 y_score(ys),
-components(0, 0, 0, 0) {
+components(0, 0, 0, 0), f(f) {
     current_tiempo = clock();
     if(username != "") name = username;
     for (int i = 0; i < 33; i++) {

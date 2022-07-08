@@ -17,7 +17,7 @@
 #include "Keyboard.h"
 #include "components.h"
 #include <ctime>
-
+#include <functional>
 using namespace std;
 
 class player : public components {
@@ -38,10 +38,10 @@ protected:
     bool seen = 1;
     int cantidad_items = 0;
     string name = "Guest420";
-
+    function<void()> f;
     char mapa[33][54];
 public:
-    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **&map, clock_t tiempo, string username);
+    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **&map, clock_t tiempo, string username, function<void()>& f);
 
     void draw();
 
