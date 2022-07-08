@@ -30,7 +30,7 @@ void player::draw() {
         v.draw();
     }
     if (cantidad_items != puntos) {
-        static_tiempo = (clock() - current_tiempo) / CLOCKS_PER_SEC;
+        static_tiempo = (clock() - current_tiempo) / 175000;
         //cout << name << '\n';
     }
     al_draw_textf(al_create_builtin_font(), al_map_rgb(255, 255, 255), x_score, y_score, 1, "puntos: %d", puntos);
