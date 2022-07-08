@@ -49,6 +49,9 @@ Al iniciar eljuego se te pedirá un nickname para posteriormente ser guardado en
 ### Score:
 Al seleccionar **Jugar** se iniciará el juego y con ello un contador que se utilizará el puntaje que obtuviste luego de recoger todos tus items. Este iniciara en 0 e ira aumentando cada segundo. Una vez que ganes el contador se detendrá y se guardará en un archivo junto con tu nickname.
 
+## Video de explicación
+<a>https://youtu.be/haBNslGqT0A
+
 ## Bibliografía:
 
 > [1]  SiegeLord.(s.f.). Allegro Vivace. Github-Allegro Wiki. Recuperado el 2 de junio del 2022 de https://github.com/liballeg/allegro_wiki/wiki/Allegro-Vivace.
