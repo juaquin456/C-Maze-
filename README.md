@@ -31,12 +31,27 @@ Al iniciar eljuego se te pedirá un nickname para posteriormente ser guardado en
    **3. Ranking:** Esta opción te mostrará una pantalla donde podrás visualizar todos los jugadores que se registraron en eljuego con sus respectivos puntajes                          ordenados de mayor a menor.
 
    **4. Personalizar:** En esta opción se te permitirá elegir uno de los 3 mapas en el que quieras jugar, además te mostrará una previsualización del mapa.
+   
+   |    Mapa 1    |    Mapa 2   |   Mapa 3  |
+| ----------- | ----------- | ----------- |
+| ![image](https://user-images.githubusercontent.com/102132128/177919549-37fbe1d2-5d33-4f64-adc7-95429bb49dea.png) | ![image](https://user-images.githubusercontent.com/102132128/177919528-fc9d6f8f-7b81-4467-b8f6-c4a2bb558e5d.png) | ![image](https://user-images.githubusercontent.com/102132128/177919446-c444394d-0396-4865-bda4-f3f2da5c9787.png) |
+
 
 
 ### Score:
 Al seleccionar **Jugar** se iniciará el juego y con ello un contador que se utilizará el puntaje que obtuviste luego de recoger todos tus items. Este iniciara en 0 e ira aumentando cada segundo. Una vez que ganes el contador se detendrá y se guardará en un archivo junto con tu nickname.
 
 ## Bibliografía:
+
+> [1]  SiegeLord.(s.f.). Allegro Vivace. Github-Allegro Wiki. Recuperado el 2 de junio del 2022 de https://github.com/liballeg/allegro_wiki/wiki/Allegro-Vivace.
+
+> [2]  Allegro webmasters.(s.f.) Allegro - A game programming library. Allegro. Recuperado el 9 de junio del 2022 de https://liballeg.org/
+
+> [3]  Brucato C.(2013). The traveling salesman problem.
+https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi31qbEvOj4AhV9pZUCHarPD5oQFnoECAUQAQ&url=https%3A%2F%2Fwww.mathematics.pitt.edu%2Fsites%2Fdefault%2Ffiles%2FTSP.pdf&usg=AOvVaw3zXFgEnK8O6f157y53eOmz
+
+> [4]  Sánchez. G. (2005).Tutorial interactivo para la enseñanza y el aprendizaje de los algoritmos de búsqueda en anchura y en profundidad
+http://bioinfo.uib.es/~joemiro/aenui/procJenui/Jen2006/prDef0107_72b32a1f75.pdf
 
 
 ## Equipo:
