@@ -68,6 +68,8 @@ void application::run() {
     ALLEGRO_BITMAP* menu_image = al_load_bitmap("../images/menu.png");
     ALLEGRO_BITMAP* rank_image = al_load_bitmap("../images/ranking.png");
     ALLEGRO_BITMAP* maps_image = al_load_bitmap("../images/maps.png");
+    ALLEGRO_BITMAP* lose_image = al_load_bitmap("../images/lose.png");
+    ALLEGRO_BITMAP* win_image = al_load_bitmap("../images/win.png");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(*disp));
@@ -140,6 +142,14 @@ void application::run() {
             else if (v.currentView() == 5) {
                 al_draw_bitmap(maps_image,0,0,0);
             }
+            else if (v.currentView() == 6) {
+                if(v.get_win())
+                    al_draw_bitmap(win_image,0,0,0);
+                else{
+                    al_draw_bitmap(lose_image,0,0,0);
+                }
+
+            }
 
             for (auto const e: v.getVista()) {
                 e->draw();
@@ -160,6 +170,8 @@ void application::run() {
     al_destroy_bitmap(menu_image);
     al_destroy_bitmap(rank_image);
     al_destroy_bitmap(maps_image);
+    al_destroy_bitmap(lose_image);
+    al_destroy_bitmap(win_image);
     al_destroy_sample(pop);
     al_destroy_sample(popi);
     al_destroy_font(font);
