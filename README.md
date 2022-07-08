@@ -13,6 +13,11 @@ CMAZE++ es un juego en el que tendrás que demostrar tu habilidad para resolver 
 
 > Utilizacion de archivos:
 
+La implementación del programa tiene como parte fundamental la utilización de archivos en aspectos como el manejo de Ranking y mapas.
+
+**Mapas:** Se implementaron 3 distintos mapas que se podrá elegir en la opción personalizar. Estos serán leídos de archivos .txt que se encuentran en la carpeta “mapas”.
+
+**Ranking:** Los puntajes y nicknames se guardaran en un archivo que será leído y sobrescrito cada vez que se termine el juego. Además este guardará los puntajes ordenados
 
 
 ## Partes del Programa:
@@ -31,10 +36,14 @@ Al iniciar eljuego se te pedirá un nickname para posteriormente ser guardado en
 ### Score:
 Al seleccionar **Jugar** se iniciará el juego y con ello un contador que se utilizará el puntaje que obtuviste luego de recoger todos tus items. Este iniciara en 0 e ira aumentando cada segundo. Una vez que ganes el contador se detendrá y se guardará en un archivo junto con tu nickname.
 
+## Bibliografía:
+
+
 ## Equipo:
 
 |    Juaquin Remon    |    Leandro Machaca    |    Virginia Puente    |    Dimael Rivas    |
 | ----------- | ----------- | ----------- | ----------- |
+| ![](https://avatars.githubusercontent.com/u/83974317?v=4) | ![](https://avatars.githubusercontent.com/u/102132128?s=400&v=4) | ![](https://avatars.githubusercontent.com/u/78549698?v=4) | ![](https://avatars.githubusercontent.com/u/88595171?v=4) |
 | [github.com/juaquin456](https://github.com/juaquin456) | [github.com/JLeandroJM](https://github.com/JLeandroJM) | [github.com/Mycodeiskuina](https://github.com/Mycodeiskuina) | [github.com/artrivas](https://github.com/artrivas)|
 
 
