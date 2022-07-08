@@ -6,10 +6,7 @@
 #define PROYECTO_FINAL_PROYECTO_GRUPO6_PLAYER_H
 
 #include <unordered_map>
-#include <iostream>
-#include <vector>
-#include <memory>
-#include <list>
+#include <allegro5/allegro_font.h>
 #include <fstream>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
@@ -24,7 +21,7 @@ class player : public components {
     int ale_x();
 
 protected:
-    Keyboard *k = Keyboard::get_instance();
+    Keyboard* k = Keyboard::get_instance();
     ALLEGRO_COLOR a = al_map_rgb_f(255, 0, 0);
     unordered_map<int, item> items;
     clock_t current_tiempo;
@@ -40,8 +37,9 @@ protected:
     string name = "Guest420";
     function<void()> f;
     char mapa[33][54];
+    bool empieza = 1;
 public:
-    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char **&map, clock_t tiempo, string username, function<void()>& f);
+    player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**& map, string username, function<void()>& f);
 
     void draw();
 

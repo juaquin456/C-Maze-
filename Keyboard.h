@@ -5,17 +5,16 @@
 #ifndef PROYECTO_FINAL_PROYECTO_GRUPO6_KEYBOARD_H
 #define PROYECTO_FINAL_PROYECTO_GRUPO6_KEYBOARD_H
 
-#include <memory>
 #include <allegro5/allegro5.h>
 
 class Keyboard {
-    inline static Keyboard *instance;
-    ALLEGRO_KEYBOARD_STATE *ks = nullptr;
+    inline static Keyboard* instance;
+    ALLEGRO_KEYBOARD_STATE* ks = nullptr;
 
     Keyboard();
 
 public:
-    static Keyboard *get_instance();
+    static Keyboard* get_instance();
 
     void update();
 

@@ -8,7 +8,7 @@ Keyboard::Keyboard() {
     ks = new ALLEGRO_KEYBOARD_STATE;
 }
 
-Keyboard *Keyboard::get_instance() {
+Keyboard* Keyboard::get_instance() {
     if (instance == nullptr) instance = new Keyboard();
     return instance;
 }

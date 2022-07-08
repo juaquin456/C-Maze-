@@ -8,20 +8,20 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_ttf.h>
-#include <iostream>
+
 #include <functional>
 
 #include "components.h"
 #include "Display.h"
 
 class button : public components {
-    const char *text;
+    const char* text;
     std::function<void()> f;
     ALLEGRO_COLOR a = al_map_rgb_f(255, 255, 255);
 public:
-    button(const char *t, float xi, float yi, float xf, float yf, std::function<void()> &f) : text(t),
-                                                                                              components(xi, yi, xf,
-                                                                                                         yf), f(f) {};
+    button(const char* t, float xi, float yi, float xf, float yf, std::function<void()>& f) : text(t),
+        components(xi, yi, xf,
+            yf), f(f) {};
 
     void draw() override;
 

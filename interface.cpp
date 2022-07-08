@@ -2,19 +2,13 @@
 // Created by juaquin on 29/05/22.
 //
 
-#include <fstream>
-#include <iterator>
-#include <unordered_map>
-#include <algorithm>
-#include<ctime>
-#include <utility>
 #include "interface.h"
 
 
-char **interface::llenar_mapa(const string &file,const int& x, const int& y) {
+char** interface::llenar_mapa(const string& file, const int& x, const int& y) {
     ifstream archivo(file);
-    char **array1;
-    array1 = new char *[x];
+    char** array1;
+    array1 = new char* [x];
     string linea;
     int w = 0;
 
@@ -23,7 +17,7 @@ char **interface::llenar_mapa(const string &file,const int& x, const int& y) {
         getline(archivo, linea);
         w = 0;
 
-        for (char k: linea) {
+        for (char k : linea) {
             array1[h][w] = k;
             w++;
         }
@@ -34,7 +28,7 @@ char **interface::llenar_mapa(const string &file,const int& x, const int& y) {
 }
 
 void interface::render_vista(int n_interface) {
-    if(n_interface == 5){
+    if (n_interface == 5) {
         interfaces.erase(n_interface);
     }
     if (n_interface == 3) {
@@ -42,25 +36,25 @@ void interface::render_vista(int n_interface) {
     }
     if (interfaces.find(n_interface) == interfaces.end()) {
         switch (n_interface) {
-            case 1:
-                interfaces.insert({n_interface, create_input()});
-                break;
-            case 2:
-                interfaces.insert({n_interface, create_menu()});
-                break;
-            case 3:
-                interfaces.insert({n_interface, create_mapa()});
+        case 1:
+            interfaces.insert({ n_interface, create_input() });
+            break;
+        case 2:
+            interfaces.insert({ n_interface, create_menu() });
+            break;
+        case 3:
+            interfaces.insert({ n_interface, create_mapa() });
 
-                break;
-            case 4:
-                interfaces.insert({n_interface, create_rank()});
-                break;
-            case 5:
-                interfaces.insert({n_interface, create_input_map()});
-                break;
-            case 6:
-                interfaces.insert({n_interface, win()});
-                break;
+            break;
+        case 4:
+            interfaces.insert({ n_interface, create_rank() });
+            break;
+        case 5:
+            interfaces.insert({ n_interface, create_input_map() });
+            break;
+        case 6:
+            interfaces.insert({ n_interface, win() });
+            break;
         }
     }
     current_v = n_interface;
@@ -77,13 +71,12 @@ int interface::currentView() const {
 
 vector<std::shared_ptr<components>> interface::create_input() {
     vector<std::shared_ptr<components>> temp;
-    function<void(string)> fun_write = [this](const string &text) {
+    function<void(string)> fun_write = [this](const string& text) {
         this->user = text;
-        cout << "xd" << user << '\n';
         this->render_vista(2);
     };
     temp.push_back(make_shared<label>("Ingrese su usuario:", 440, 290, 640, 350, al_map_rgb(0, 0, 0),
-                                      al_map_rgb(255, 255, 255)));
+        al_map_rgb(255, 255, 255)));
     temp.push_back(make_shared<textbox>("", 440, 320, 640, 400, fun_write));
     return temp;
 }
@@ -121,17 +114,16 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
             }
         }
     }
-    clock_t tiempo = clock();
-    function<void()> f_temp_win = [this](){this->render_vista(6);
-                                                this->is_win = true;};
-    function<void()> f_temp_lose = [this](){this->render_vista(6);
-        this->is_win = false;};
-    temp.push_back(make_shared<playerA>(2, 1052, 48, al_map_rgb(255, 0, 0), 100, 675, mapa, tiempo, this->user, f_temp_win));
+    function<void()> f_temp_win = [this]() {this->render_vista(6);
+    this->is_win = true; };
+    function<void()> f_temp_lose = [this]() {this->render_vista(6);
+    this->is_win = false; };
+    temp.push_back(make_shared<playerA>(19, 1052, 48, al_map_rgb(255, 0, 0), 100, 675, mapa, this->user, f_temp_win));
     cout << pvp << endl;
     if (pvp)
-        temp.push_back(make_shared<playerB>(2, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user, f_temp_lose));
+        temp.push_back(make_shared<playerB>(19, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
     else
-        temp.push_back(make_shared<bot>(2, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, tiempo, this->user, f_temp_lose));
+        temp.push_back(make_shared<bot>(19, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
 
     return temp;
 }
@@ -144,9 +136,9 @@ vector<std::shared_ptr<components>> interface::create_rank() {
 
     vector<std::shared_ptr<components>> temp;
     temp.push_back(make_shared<label>("User", H / 2 - 100, 180, H / 2 - 50, 220,
-                                      al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
+        al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     temp.push_back(make_shared<label>("Score", H / 2 + 50, 180, H / 2 + 100, 220,
-                                      al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
+        al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     ifstream f("rank");
     if (f.is_open()) {
         unordered_map<string, string> datos;
@@ -166,21 +158,21 @@ vector<std::shared_ptr<components>> interface::create_rank() {
             }
             c++;
         }
-        for (auto i: datos) {
+        for (auto i : datos) {
             new_datos.push_back(i);
         }
-        sort(new_datos.begin(), new_datos.end(), [](pair<string, string> &a, pair<string, string> &b) {
+        sort(new_datos.begin(), new_datos.end(), [](pair<string, string>& a, pair<string, string>& b) {
             return a.second < b.second;
-        });
+            });
 
         int i = 0;
-        for (auto &[a, b]: new_datos) {
-            const char *t_name = a.c_str();
-            const char *t_score = b.c_str();
+        for (auto& [a, b] : new_datos) {
+            const char* t_name = a.c_str();
+            const char* t_score = b.c_str();
             temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 100 + i * 20, H / 2 - 50, 120 + i * 20,
-                                              al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
+                al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
             temp.push_back(make_shared<label>(t_score, H / 2 + 50, 100 + i * 20, H / 2 + 100, 120 + i * 20,
-                                              al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
+                al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
             i++;
         }
     }
@@ -190,21 +182,21 @@ vector<std::shared_ptr<components>> interface::create_rank() {
     return temp;
 }
 
-vector<std::shared_ptr<components>> interface::create_input_map(){
+vector<std::shared_ptr<components>> interface::create_input_map() {
     vector<std::shared_ptr<components>> temp;
 
-    function<void()> choose_map1 = [this](){
-        this->map_name = "../maps/mapa.txt";
+    function<void()> choose_map1 = [this]() {
+        this->map_name = "maps/mapa.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
-    function<void()> choose_map2 = [this](){
-        this->map_name = "../maps/mapa2.txt";
+    function<void()> choose_map2 = [this]() {
+        this->map_name = "maps/mapa2.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
-    function<void()> choose_map3 = [this](){
-        this->map_name = "../maps/mapa3.txt";
+    function<void()> choose_map3 = [this]() {
+        this->map_name = "maps/mapa3.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
@@ -216,7 +208,7 @@ vector<std::shared_ptr<components>> interface::create_input_map(){
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 54; j++) {
             if (mapa[i][j] == 'x') {
-                temp.push_back(make_shared<block>(432+j * 4,500+ i * 4,432+ (j + 1) * 4, 500+(i + 1) * 4));
+                temp.push_back(make_shared<block>(432 + j * 4, 500 + i * 4, 432 + (j + 1) * 4, 500 + (i + 1) * 4));
             }
         }
     }

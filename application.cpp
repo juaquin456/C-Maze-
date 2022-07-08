@@ -4,23 +4,8 @@
 
 #include "application.h"
 
-#include <iostream>
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
-
-#include "Keyboard.h"
-#include "Mouse.h"
-#include "Display.h"
-#include "playerA.h"
-#include "bot.h"
-
-
-void must_init(bool test, const char *description) {
+void must_init(bool test, const char* description) {
     if (test) return;
 
     printf("couldn't initialize %s\n", description);
@@ -38,38 +23,38 @@ void application::run() {
     must_init(al_install_keyboard(), "keyboard");
     must_init(al_install_mouse(), "mouse");
 
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
+    ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     must_init(timer, "timer");
 
-    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
+    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
     must_init(queue, "queue");
 
     al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    auto &disp = Display<ALLEGRO_DISPLAY *>::getInstance(al_create_display(H, V))->get();
+    auto& disp = Display<ALLEGRO_DISPLAY*>::getInstance(al_create_display(H, V))->get();
     //ALLEGRO_DISPLAY* disp = al_create_display(1080, 720);
     must_init(*disp, "display");
 
-    ALLEGRO_FONT *font = al_create_builtin_font();
+    ALLEGRO_FONT* font = al_create_builtin_font();
     must_init(font, "font");
 
     must_init(al_init_primitives_addon(), "primitives");
     must_init(al_install_audio(), "audio");
     must_init(al_init_acodec_addon(), "audio codecs");
     must_init(al_reserve_samples(16), "reserve samples");
-    must_init(al_init_image_addon(),"imagen");
+    must_init(al_init_image_addon(), "imagen");
 
-    ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
-    ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
+    ALLEGRO_SAMPLE* pop = al_load_sample("sounds/floop2_x.wav");
+    ALLEGRO_SAMPLE* popi = al_load_sample("sounds/blip.wav");
 
-    ALLEGRO_BITMAP* user_input = al_load_bitmap("../images/user.png");
-    ALLEGRO_BITMAP* menu_image = al_load_bitmap("../images/menu.png");
-    ALLEGRO_BITMAP* rank_image = al_load_bitmap("../images/ranking.png");
-    ALLEGRO_BITMAP* maps_image = al_load_bitmap("../images/maps.png");
-    ALLEGRO_BITMAP* lose_image = al_load_bitmap("../images/lose.png");
-    ALLEGRO_BITMAP* win_image = al_load_bitmap("../images/win.png");
+    ALLEGRO_BITMAP* user_input = al_load_bitmap("images/user.png");
+    ALLEGRO_BITMAP* menu_image = al_load_bitmap("images/menu.png");
+    ALLEGRO_BITMAP* rank_image = al_load_bitmap("images/ranking.png");
+    ALLEGRO_BITMAP* maps_image = al_load_bitmap("images/maps.png");
+    ALLEGRO_BITMAP* lose_image = al_load_bitmap("images/lose.png");
+    ALLEGRO_BITMAP* win_image = al_load_bitmap("images/win.png");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(*disp));
@@ -80,11 +65,9 @@ void application::run() {
     bool redraw = true;
     ALLEGRO_EVENT event;
 
-    Keyboard *k = Keyboard::get_instance();
-    Mouse *m = Mouse::getInstance();
+    Keyboard* k = Keyboard::get_instance();
+    Mouse* m = Mouse::getInstance();
     al_start_timer(timer);
-    //playerA P(9, 100, 100, al_map_rgb(255, 0, 0), 100, 600);
-    //bot Q(9, 28, 28, al_map_rgb(255, 255, 0), 700, 600);
 
 
     while (1) {
@@ -94,34 +77,34 @@ void application::run() {
             done = true;
 
         switch (event.type) {
-            case ALLEGRO_EVENT_MOUSE_AXES:
-                m->move(event.mouse);
-                break;
-            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+        case ALLEGRO_EVENT_MOUSE_AXES:
+            m->move(event.mouse);
+            break;
+        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 
 
-                for (auto const e: v.getVista()) {
-                    if (e->is_on_bound()) {
-                        e->click_event();
-                    }
+            for (auto const e : v.getVista()) {
+                if (e->is_on_bound()) {
+                    e->click_event();
                 }
-                break;
+            }
+            break;
 
-            case ALLEGRO_EVENT_KEY_DOWN:
+        case ALLEGRO_EVENT_KEY_DOWN:
 
-                for (auto const e: v.getVista()) {
-                    if (e->is_press_key())
-                        e->key_event(event.keyboard.keycode);
-                }
-                break;
+            for (auto const e : v.getVista()) {
+                if (e->is_press_key())
+                    e->key_event(event.keyboard.keycode);
+            }
+            break;
 
-            case ALLEGRO_EVENT_TIMER:
-                redraw = true;
-                break;
+        case ALLEGRO_EVENT_TIMER:
+            redraw = true;
+            break;
 
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                done = true;
-                break;
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+            done = true;
+            break;
         }
 
         if (done)
@@ -131,36 +114,30 @@ void application::run() {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             if (v.currentView() == 1) {
-                al_draw_bitmap(user_input,0,0,0);
+                al_draw_bitmap(user_input, 0, 0, 0);
             }
             else if (v.currentView() == 2) {
-                al_draw_bitmap(menu_image,0,0,0);
+                al_draw_bitmap(menu_image, 0, 0, 0);
             }
             else if (v.currentView() == 4) {
-                al_draw_bitmap(rank_image,0,0,0);
+                al_draw_bitmap(rank_image, 0, 0, 0);
             }
             else if (v.currentView() == 5) {
-                al_draw_bitmap(maps_image,0,0,0);
+                al_draw_bitmap(maps_image, 0, 0, 0);
             }
             else if (v.currentView() == 6) {
-                if(v.get_win())
-                    al_draw_bitmap(win_image,0,0,0);
-                else{
-                    al_draw_bitmap(lose_image,0,0,0);
+                if (v.get_win())
+                    al_draw_bitmap(win_image, 0, 0, 0);
+                else {
+                    al_draw_bitmap(lose_image, 0, 0, 0);
                 }
 
             }
 
-            for (auto const e: v.getVista()) {
+            for (auto const e : v.getVista()) {
                 e->draw();
             }
 
-            /*if (v.currentView() == 3) {
-                P.draw();
-                P.move();
-                Q.draw();
-                Q.move();
-            }*/
 
             al_flip_display();
             redraw = false;

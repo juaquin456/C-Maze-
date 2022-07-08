@@ -15,14 +15,19 @@
 #include "textbox.h"
 #include "label.h"
 #include "bot.h"
-#include "player.h"
 #include "playerA.h"
 #include "playerB.h"
+#include<string>
+
+#include <fstream>
+#include <iterator>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
 class interface {
-    vector<std::shared_ptr<components>> *data = nullptr;
+    vector<std::shared_ptr<components>>* data = nullptr;
     unordered_map<int, vector<std::shared_ptr<components>>> interfaces;    //1:input, 2:menu, 3:map, 4:rank
     vector<std::shared_ptr<components>> create_input();
 
@@ -35,8 +40,8 @@ class interface {
     vector<std::shared_ptr<components>> create_input_map();
 
     vector<std::shared_ptr<components>> win();
-    string map_name = "../maps/mapa.txt";
-    char ** mapa = llenar_mapa(map_name, 33, 54);
+    string map_name = "maps/mapa.txt";
+    char** mapa = llenar_mapa(map_name, 33, 54);
     string user;
     int H;
     int V;
@@ -54,7 +59,7 @@ public:
 
     int currentView() const;
 
-    char **llenar_mapa(const string &file,const int& x, const int& y);
+    char** llenar_mapa(const string& file, const int& x, const int& y);
 
     bool get_win();
 };

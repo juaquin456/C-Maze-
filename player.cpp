@@ -2,8 +2,9 @@
 // Created by leandro on 11/06/22.
 //
 
-#include <allegro5/allegro_font.h>
+
 #include "player.h"
+#include<iostream>
 int player::ale_x() {
     int iSecret;
 
@@ -11,12 +12,11 @@ int player::ale_x() {
     return iSecret;
 }
 
-player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**& map,clock_t tiempo,string username, function<void()>& f) : cantidad_items(c), x(x), y(y),
+player::player(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char**& map, string username, function<void()>& f) : cantidad_items(c), x(x), y(y),
 a(color), x_score(xs),
 y_score(ys),
 components(0, 0, 0, 0), f(f) {
-    current_tiempo = clock();
-    if(username != "") name = username;
+    if (username != "") name = username;
     for (int i = 0; i < 33; i++) {
         for (int j = 0; j < 54; j++) {
             mapa[i][j] = map[i][j];
@@ -30,27 +30,12 @@ void player::draw() {
         v.draw();
     }
     if (cantidad_items != puntos) {
-        static_tiempo = (clock()-current_tiempo)/CLOCKS_PER_SEC;
+        static_tiempo = (clock() - current_tiempo) / CLOCKS_PER_SEC;
         //cout << name << '\n';
     }
-    else if(who_was == "playerA" && seen) {
-        fstream myfile;
-        myfile.open("rank",ios::out|ios::app);
-        myfile << name << ' ' << static_tiempo << '\n';
-        myfile.close();
-        seen = 0;
-    }
-    else if (who_was == "playerB" && seen) {
-        fstream myfile;
-        myfile.open("rank", ios::out | ios::app);
-        myfile << name << ' ' << static_tiempo<<'\n';
-        myfile.close();
-        seen = 0;
-    }
-
     al_draw_textf(al_create_builtin_font(), al_map_rgb(255, 255, 255), x_score, y_score, 1, "puntos: %d", puntos);
-    al_draw_textf(al_create_builtin_font(), al_map_rgb(255, 255, 255), x_score, y_score+15, 1, "tiempo: %d", static_tiempo);
-    move();
+    al_draw_textf(al_create_builtin_font(), al_map_rgb(255, 255, 255), x_score, y_score + 15, 1, "tiempo: %d", static_tiempo);
+    this->move();
 }
 
 void player::alter_map() {
