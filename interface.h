@@ -40,7 +40,7 @@ class interface {
     vector<std::shared_ptr<components>> create_input_map();
 
     vector<std::shared_ptr<components>> win();
-    string map_name = "maps/mapa.txt";
+    string map_name = "../maps/mapa.txt";
     char** mapa = llenar_mapa(map_name, 33, 54);
     string user;
     int H;

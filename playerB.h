@@ -9,7 +9,7 @@
 #include "player.h"
 
 class playerB : public player {
-    ALLEGRO_SAMPLE* popi = al_load_sample("sounds/blip.wav");
+    ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
 public:
     playerB(int c, int x, int y, ALLEGRO_COLOR color, int xs, int ys, char** map, string username, function<void()>& f)
         : player(c, x, y, color, xs, ys,
@@ -52,7 +52,7 @@ public:
             puntos++;
             if (puntos == cantidad_items) {
                 fstream myfile;
-                myfile.open("rank", ios::out | ios::app);
+                myfile.open("../rank", ios::out | ios::app);
                 std::cout << "here";
                 myfile << name << ' ' << static_tiempo << '\n';
                 myfile.close();

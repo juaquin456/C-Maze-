@@ -118,12 +118,12 @@ vector<std::shared_ptr<components>> interface::create_mapa() {
     this->is_win = true; };
     function<void()> f_temp_lose = [this]() {this->render_vista(6);
     this->is_win = false; };
-    temp.push_back(make_shared<playerA>(19, 1052, 48, al_map_rgb(255, 0, 0), 100, 675, mapa, this->user, f_temp_win));
+    temp.push_back(make_shared<playerA>(9, 1052, 48, al_map_rgb(255, 0, 0), 100, 675, mapa, this->user, f_temp_win));
     cout << pvp << endl;
     if (pvp)
-        temp.push_back(make_shared<playerB>(19, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
+        temp.push_back(make_shared<playerB>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
     else
-        temp.push_back(make_shared<bot>(19, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
+        temp.push_back(make_shared<bot>(9, 28, 28, al_map_rgb(255, 255, 0), 700, 675, mapa, this->user, f_temp_lose));
 
     return temp;
 }
@@ -139,7 +139,7 @@ vector<std::shared_ptr<components>> interface::create_rank() {
         al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
     temp.push_back(make_shared<label>("Score", H / 2 + 50, 180, H / 2 + 100, 220,
         al_map_rgb(255, 255, 255), al_map_rgb(0, 0, 0)));
-    ifstream f("rank");
+    ifstream f("../rank");
     if (f.is_open()) {
         unordered_map<string, string> datos;
         vector<pair<string, string>> new_datos;
@@ -169,9 +169,9 @@ vector<std::shared_ptr<components>> interface::create_rank() {
         for (auto& [a, b] : new_datos) {
             const char* t_name = a.c_str();
             const char* t_score = b.c_str();
-            temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 100 + i * 20, H / 2 - 50, 120 + i * 20,
+            temp.push_back(make_shared<label>(a.c_str(), H / 2 - 100, 230 + i * 20, H / 2 - 50, 250 + i * 20,
                 al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
-            temp.push_back(make_shared<label>(t_score, H / 2 + 50, 100 + i * 20, H / 2 + 100, 120 + i * 20,
+            temp.push_back(make_shared<label>(t_score, H / 2 + 50, 230 + i * 20, H / 2 + 100, 250 + i * 20,
                 al_map_rgb(0, 0, 0), al_map_rgb(255, 255, 255)));
             i++;
         }
@@ -186,17 +186,17 @@ vector<std::shared_ptr<components>> interface::create_input_map() {
     vector<std::shared_ptr<components>> temp;
 
     function<void()> choose_map1 = [this]() {
-        this->map_name = "maps/mapa.txt";
+        this->map_name = "../maps/mapa.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
     function<void()> choose_map2 = [this]() {
-        this->map_name = "maps/mapa2.txt";
+        this->map_name = "../maps/mapa2.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };
     function<void()> choose_map3 = [this]() {
-        this->map_name = "maps/mapa3.txt";
+        this->map_name = "../maps/mapa3.txt";
         this->mapa = llenar_mapa(map_name, 33, 54);
         this->render_vista(5);
     };

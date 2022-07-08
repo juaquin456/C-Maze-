@@ -46,15 +46,15 @@ void application::run() {
     must_init(al_reserve_samples(16), "reserve samples");
     must_init(al_init_image_addon(), "imagen");
 
-    ALLEGRO_SAMPLE* pop = al_load_sample("sounds/floop2_x.wav");
-    ALLEGRO_SAMPLE* popi = al_load_sample("sounds/blip.wav");
+    ALLEGRO_SAMPLE* pop = al_load_sample("../sounds/floop2_x.wav");
+    ALLEGRO_SAMPLE* popi = al_load_sample("../sounds/blip.wav");
 
-    ALLEGRO_BITMAP* user_input = al_load_bitmap("images/user.png");
-    ALLEGRO_BITMAP* menu_image = al_load_bitmap("images/menu.png");
-    ALLEGRO_BITMAP* rank_image = al_load_bitmap("images/ranking.png");
-    ALLEGRO_BITMAP* maps_image = al_load_bitmap("images/maps.png");
-    ALLEGRO_BITMAP* lose_image = al_load_bitmap("images/lose.png");
-    ALLEGRO_BITMAP* win_image = al_load_bitmap("images/win.png");
+    ALLEGRO_BITMAP* user_input = al_load_bitmap("../images/user.png");
+    ALLEGRO_BITMAP* menu_image = al_load_bitmap("../images/menu.png");
+    ALLEGRO_BITMAP* rank_image = al_load_bitmap("../images/ranking.png");
+    ALLEGRO_BITMAP* maps_image = al_load_bitmap("../images/maps.png");
+    ALLEGRO_BITMAP* lose_image = al_load_bitmap("../images/lose.png");
+    ALLEGRO_BITMAP* win_image = al_load_bitmap("../images/win.png");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(*disp));
